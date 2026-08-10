@@ -1,701 +1,562 @@
-const quizData = [
-    {
-        question: "Qual é a capital do Espírito Santo?",
-        options: ["Serra", "Vitória", "Vila Velha", "Cariacica"],
-        answer: "Vitória"
-    },
-    {
-        question: "Qual prato típico capixaba é preparado com peixe, urucum e panela de barro?",
-        options: ["Moqueca baiana", "Moqueca capixaba", "Bobó de camarão", "Peixada paulista"],
-        answer: "Moqueca capixaba"
-    },
-    {
-        question: "Em qual município está localizado o Convento da Penha?",
-        options: ["Vitória", "Guarapari", "Vila Velha", "Anchieta"],
-        answer: "Vila Velha"
-    },
-    {
-        question: "Qual é a principal festa religiosa realizada em Anchieta?",
-        options: ["Festa da Penha", "Festa de São Pedro", "Festa de Iemanjá", "Festa Nacional de São José de Anchieta"],
-        answer: "Festa Nacional de São José de Anchieta"
-    },
-    {
-        question: "O Parque Estadual da Pedra Azul está localizado em qual município?",
-        options: ["Domingos Martins", "Venda Nova do Imigrante", "Marechal Floriano", "Alfredo Chaves"],
-        answer: "Domingos Martins"
-    },
-    {
-        question: "Qual ingrediente diferencia a moqueca capixaba da moqueca baiana?",
-        options: ["Leite de coco", "Azeite de dendê", "Pimenta-do-reino", "Azeite comum"],
-        answer: "Azeite de dendê"
-    },
-    {
-        question: "Qual município é conhecido como “Cidade Saúde” devido ao turismo de praias e balneários?",
-        options: ["Guarapari", "Linhares", "Vitória", "São Mateus"],
-        answer: "Guarapari"
-    },
-    {
-        question: "Em qual região do Espírito Santo está localizada Ecoporanga?",
-        options: ["Região Metropolitana", "Região Noroeste", "Região Sul", "Região Serrana"],
-        answer: "Região Noroeste"
-    },
-    {
-        question: "Em qual municipio está a Praia de Itaúnas, famosa por suas dunas?",
-        options: ["Conceição da Barra", "São Mateus", "Linhares", "Aracruz"],
-        answer: "Conceição da Barra"
-    },
-    {
-        question: "Qual fruta é símbolo da cidade de Linhares e movimenta seu turismo rural?",
-        options: ["Goiaba", "Cacau", "Coco", "Mamão"],
-        answer: "Cacau"
-    },
-    {
-        question: "Qual é a principal característica das panelas de barro capixabas?",
-        options: ["Feitas no torno elétrico", "Pintadas com esmalte colorido", "Modeladas à mão e queimadas ao ar livre", "Produzidas apenas em fábricas"],
-        answer: "Modeladas à mão e queimadas ao ar livre"
-    },
-    {
-        question: "Qual parque nacional localizado no Espírito Santo preserva áreas de Mata Atlântica e lagos?",
-        options: ["Parque Nacional do Caparaó", "Parque Nacional da Tijuca", "Parque Nacional da Serra da Canastra", "Parque Nacional de Itatiaia"],
-        answer: "Parque Nacional do Caparaó"
-    },
-    {
-        question: "Qual é o pico mais alto do Espírito Santo?",
-        options: ["Pico da Bandeira", "Pedra Azul", "Pico do Eldorado", "Pico da Serra"],
-        answer: "Pico da Bandeira"
-    },
-    {
-        question: "Qual evento gastronômico de Venda Nova do Imigrante celebra a cultura italiana?",
-        options: ["Festa do Café", "Festa da Uva", "Festa da Polenta", "Festa da Pizza"],
-        answer: "Festa da Polenta"
-    },
-    {
-        question: "Qual cidade abriga o Farol de Santa Luzia?",
-        options: ["Guarapari", "Vila Velha", "Anchieta", "Serra"],
-        answer: "Vila Velha"
-    },
-    {
-        question: "Qual vila capixaba que foi coberta pela areia?",
-        options: ["Agreste de Tieta", "Guriri", "Itaúnas", "Manguinhos"],
-        answer: "Itaúnas"
-    },
-    {
-        question: "A Ilha das Caieiras, em Vitória, é famosa por qual atividade gastronômica?",
-        options: ["Produção de queijos", "Descasque de siri", "Criação de camarões", "Cultivo de ostras"],
-        answer: "Descasque de siri"
-    },
-    {
-        question: "Qual região está localizado o Estado do Espírito Santo?",
-        options: ["Nordeste", "Sudeste", "Sul", "Centro-Oeste"],
-        answer: "Sudeste"
-    },
-    {
-        question: "Qual dança típica de Itaúnas é patrimônio imaterial do Brasil?",
-        options: ["Fandango", "Congo", "Forró pé de serra", "Dança do Boi"],
-        answer: "Forró pé de serra"
-    },
-    {
-        question: "Qual é a festividade Ecoporanguense que acontece anualmente no interior do município e reune toda comunidade da Prata dos Baianos em uma brincadeira?",
-        options: ["Rodeio", "Esconde-esconde", "Roubada da bandeira", "Congo de São Benedito"],
-        answer: "Roubada da bandeira"
-    },
-    {
-        question: "O monumento do Buda Gigante está localizado em qual município capixaba?",
-        options: ["João Neiva", "Vila Velha", "Ibiraçu", "Guarapari"],
-        answer: "Ibiraçu"
-    },
-    {
-        question: "Qual é a cor predominante na fachada do Convento da Penha?",
-        options: ["Amarela", "Branca", "Azul", "Bege"],
-        answer: "Branca"
-    },
-    {
-        question: "Qual o instrumento que é um dos símbolos do Espírito Santo, comumente utilizado no congo capixaba?",
-        options: ["Guitarra", "Violão", "Sintetizadores", "Casaca"],
-        answer: "Casaca"
-    },
-    {
-        question: "Qual é o município com maior produção de leite no Espírito Santo?",
-        options: ["Barra de São Francisco", "Alegre", "Colatina", "Ecoporanga"],
-        answer: "Ecoporanga"
-    },
-    {
-        question: "Qual festa popular reúne o Congo e a devoção a São Benedito em várias cidades capixabas?",
-        options: ["Festa de São Benedito", "Festa do Divino Espírito Santo", "Folia de Reis", "Festa de Nossa Senhora da Penha"],
-        answer: "Festa de São Benedito"
-    },
-    {
-        question: "Em que município está localizada a Lagoa Juparanã, uma das maiores lagoas do Brasil?",
-        options: ["Linhares", "Aracruz", "São Mateus", "Marataízes"],
-        answer: "Linhares"
-    },
-    {
-        question: "Qual cantor famoso nasceu em Cachoeiro de Itapemirim?",
-        options: ["Erasmo Carlos", "Fagner", "Supla", "Roberto Carlos"],
-        answer: "Roberto Carlos"
-    },
-    {
-        question: "O principal rio que corta Colatina é",
-        options: ["Rio Itapemirim", "Rio Doce", "Rio Jucu", "Rio Santa Maria"],
-        answer: "Rio Doce"
-    },
-    {
-        question: "Qual rio corta a capital Vitória?",
-        options: ["Rio Doce", "Rio Santa Maria da Vitória", "Rio Itapemirim", "Rio Jucu"],
-        answer: "Rio Santa Maria da Vitória"
-    },
-    {
-        question: "Colatina é conhecida como:",
-        options: ["Cidade Saúde", "Cidade das Dunas", "Capital da Polenta", "Princesa do Norte"],
-        answer: "Princesa do Norte"
-    },
-    {
-        question: "Qual dos municípios abaixo não está entre os maiores em extensão territorial do Espírito Santo?",
-        options: ["São Mateus", "Linhares", "Ecoporanga", "Viana"],
-        answer: "Viana"
-    },
-    {
-        question: "A capital do Espírito Santo, Vitória, é uma das três capitais brasileiras localizadas em uma:",
-        options: ["Mata", "Ilha", "Agreste", "Região de restinga"],
-        answer: "Ilha"
-    },
-    {
-        question: "Quantos municípios o estado do Espírito Santo possui?",
-        options: ["45", "78", "92", "101"],
-        answer: "78"
-    },
-    {
-        question: "O clima predominante no Espírito Santo é:",
-        options: ["Subtropical úmido", "Semiárido", "Tropical", "Equatorial"],
-        answer: "Tropical"
-    },
-    {
-        question: "Qual foi a primeira capital do Espírito Santo?",
-        options: ["Guarapari", "Serra", "Vila Velha", "Cachoeiro de Itapemirim"],
-        answer: "Vila Velha"
-    },
-    {
-        question: "Durante o período colonial, além dos portugueses, o Espírito Santo foi invadido por quais outras nacionalidades?",
-        options: ["Espanhóis e Italianos", "Franceses e Holandeses", "Ingleses e Alemães", "Suíços e Suecos"],
-        answer: "Franceses e Holandeses"
-    },
-    {
-        question: "Qual é o lema que está escrito na bandeira do Espírito Santo?",
-        options: ["Ordem e Progresso", "Libertas quae sera tamen", "Trabalha e Confia", "Liberdade e Luta"],
-        answer: "Trabalha e Confia"
-    },
-    {
-        question: "Qual variedade de café o Espírito Santo é o maior produtor do Brasil?",
-        options: ["Café Arábica", "Café Bourbon", "Café Conilon", "Café Catuaí"],
-        answer: "Café Conilon"
-    },
-    {
-        question: "Qual é o maior município do Espírito Santo em extensão territorial?",
-        options: ["Serra", "Cariacica", "Linhares", "Vitória"],
-        answer: "Linhares"
-    },
-    {
-        question: "Essa Reserva Biológica é uma das últimas áreas de Mata Atlântica preservadas do Espírito Santo. Ela é a ",
-        options: ["Reserva Biológica de Itarana", "Reserva Biológica de Sooretama", "Reserva Biológica de Ibiraçu", "Reserva Biológica de Afonso Cláudio"],
-        answer: "Reserva Biológica de Sooretama"
-    },
-    {
-        question: "Qual município do ES possui a maior população pomerana do Brasil?",
-        options: ["Venda Nova do Imigrante", "Santa Maria de Jetibá", "Domingos Martins", "Conceição do Castelo"],
-        answer: "Santa Maria de Jetibá"
-    },
-    {
-        question: "Qual língua, de origem germânica, ainda é falada por muitas famílias e estudada em escolas em Santa Maria de Jetibá?",
-        options: ["Dialeto Alemão", "Pomerano", "Holandês", "Italiano"],
-        answer: "Pomerano"
-    },
-    {
-        question: "Marataízes é conhecida em diversas partes do Brasil por sua grande produção de qual fruta?",
-        options: ["Uva", "Abacaxi", "Caju", "Mamão"],
-        answer: "Abacaxi"
-    },
-    {
-        question: "O Espírito Santo possui um importante transporte de passageiros por trem na linha:",
-        options: ["Estrada de Ferro Central do Brasil", "Estrada de Ferro Carajás", "Estrada de Ferro Vitória a Minas", "Estrada de Ferro Litorânea"],
-        answer: "Estrada de Ferro Vitória a Minas"
-    },
-    {
-        question: "O 'Estado de Jeová' foi um movimento místico-religioso e separatista que ocorreu na década de 1950, em qual região do ES?",
-        options: ["Região do Caparaó", "Região Serrana", "Região do Contestado (Cotaxé/Ecoporanga)", "Litoral Sul"],
-        answer: "Região do Contestado (Cotaxé/Ecoporanga)"
-    },
-    {
-        question: "O Contestado de Cotaxé foi uma disputa territorial de décadas entre o Espírito Santo e qual outro estado?",
-        options: ["Bahia", "Rio de Janeiro", "Minas Gerais", "Goiás"],
-        answer: "Minas Gerais"
-    },
-    {
-        question: "O Parque Pedra da Cebola, em Vitória, recebeu esse nome devido a uma formação rochosa natural cuja erosão a fez parecer:",
-        options: ["Um pão de açúcar", "Uma pirâmide", "Uma cebola descascada", "Um mamão"],
-        answer: "Uma cebola descascada"
-    },
-    {
-        question: "Qual é a principal instituição pública de ensino superior do Espírito Santo, fundada em 1954?",
-        options: ["IFES (Instituto Federal do ES)", "UFES (Universidade Federal do ES)", "UVV (Universidade de Vila Velha)", "UAB (Universidade Aberta do Brasil)"],
-        answer: "UFES (Universidade Federal do ES)"
-    },
-    {
-        question: "Em qual município do Espírito Santo está localizada a Praia Amor de Verão, próxima à foz do Rio Cricaré?",
-        options: ["Guarapari", "Conceição da Barra", "São Mateus", "Aracruz"],
-        answer: "Conceição da Barra"
-    },
-    {
-        question: "O estado recebeu o nome 'Espírito Santo' porque foi descoberto em 23 de maio de 1535, dia de:",
-        options: ["Corpus Christi", "Nossa Senhora da Penha", "Pentecostes", "Sexta-feira Santa"],
-        answer: "Pentecostes"
-    },
-    {
-        question: "O local onde o primeiro donatário, Vasco Fernandes Coutinho, desembarcou no ES, é onde hoje fica a cidade de:",
-        options: ["Vitória", "Guaçuí", "Vila Velha", "Cariacica"],
-        answer: "Vila Velha"
-    },
-    {
-        question: "Em que ano o Convento da Penha começou a ser construído, sobre um penhasco de 154 metros?",
-        options: ["1978", "1800", "1558", "2003"],
-        answer: "1558"
-    },
-    {
-        question: "A Pedra Azul, localizada em Domingos Martins, é famosa por uma característica única. Qual é ela?",
-        options: ["Ter inscrições rupestres milenares", "Emitir sons em dias de chuva", "Mudar de cor e refletir até 36 tonalidades", "Ser o ponto mais alto do estado"],
-        answer: "Mudar de cor e refletir até 36 tonalidades"
-    },
-    {
-        question: "O Porto de Tubarão é especializado principalmente na exportação de:",
-        options: ["Petróleo", "Soja", "Minério de ferro", "Café"],
-        answer: "Minério de ferro"
-    },
-    {
-        question: "A região de Aracruz era habitada originalmente pelos povos indígenas:",
-        options: ["Guaranis e Caingangues", "Tupiniquins e Guaranis", "Krenak e Pataxós", "Bororo e Terena"],
-        answer: "Tupiniquins e Guaranis"
-    },
-    {
-        question: "Qual das cidades a seguir não está entre as quatro mais populosas do Espírito Santo?",
-        options: ["Serra", "Vila Velha", "Cariacica", "Cachoeiro de Itapemirim"],
-        answer: "Cachoeiro de Itapemirim"
-    },
-    {
-        question: "O lema 'Trabalha e Confia' da bandeira capixaba foi inspirado na doutrina de qual santo?",
-        options: ["São Benedito", "São Pedro", "Santo Inácio de Loyola", "São José de Anchieta"],
-        answer: "Santo Inácio de Loyola"
-    },
-    {
-        question: "Não é um artista capixaba:",
-        options: ["Silva", "Rastaclone", "Falamansa", "Paulo Sérgio"],
-        answer: "Falamansa"
-    },
-    {
-        question: "Qual artista capixaba teve sua música tocada em Marte?",
-        options: ["Supercombo", "Macucos", "Roberto Carlos", "Casaca"],
-        answer: "Casaca"
-    },
-    {
-        question: "Nascido em Cachoeiro de Itapemirim, o capixaba Rubem Braga ficou conhecido como um dos maiores",
-        options: ["Cronistas brasileiros", "Pagodeiros brasileiros", "Dançarinos de Forró brasileiros", "Jornalistas brasileiros"],
-        answer: "Cronistas brasileiros"
-    }
-];
-
-// ----------------------------------------------------------------------
-// Variáveis e Seletores do DOM
-// ----------------------------------------------------------------------
-
-const startScreen = document.getElementById('start-screen');
-const gameScreen = document.getElementById('game-screen');
-const endGameScreen = document.getElementById('end-game-screen');
-const startButton = document.getElementById('start-button');
-const restartButton = document.getElementById('restart-button');
-const questionText = document.getElementById('question-text');
-const optionsContainer = document.getElementById('options-container');
-const optionButtons = optionsContainer.querySelectorAll('.option-button');
-const finalScoreElement = document.getElementById('final-score');
-const endGameMessageElement = document.getElementById('end-game-message');
-const rankingMessageElement = document.getElementById('ranking-message');
-const rankingContainer = document.getElementById('ranking-container');
-const webcamElement = document.getElementById('webcam');
-const canvasElement = document.getElementById('canvas');
-const countdownElement = document.getElementById('countdown');
-const currentScoreElement = document.getElementById('current-score');
-const backgroundElement = document.getElementById('background-image');
-const preloader = document.getElementById('preloader');
-const moldura = document.getElementById('moldura');
-const conteudo = document.getElementById('conteudo'); 
-const photoCountdownElement = document.getElementById('photo-countdown'); 
-
-// Seletores e Variáveis para Vidas e Glitch
-const glitchOverlay = document.getElementById('glitch-overlay');
-const lifeIcons = [
-    document.getElementById('life-1'),
-    document.getElementById('life-2'),
-    document.getElementById('life-3')
-];
-let lives = 3;
-
-let shuffledQuestions = [];
-let currentQuestionIndex = 0;
-let score = 0;
-let topScores = JSON.parse(localStorage.getItem('topScores')) || [];
-const topRankingSize = 5;
-
-const bgImages = [
-    'background1.jpg', 'background2.jpg', 'background3.jpg', 'background4.jpg', 'background5.jpg', 
-    'background6.jpg', 'background7.jpg', 'background8.jpg', 'background9.jpg', 'background10.jpg', 
-    'background11.jpg', 'background12.jpg', 'background13.jpg', 'background14.jpg', 'background15.jpg', 
-    'background16.jpg', 'background17.jpg', 'background18.jpg', 'background19.jpg', 'background20.jpg', 
-    'background21.jpg', 'background22.jpg', 'background23.jpg', 'background24.jpg', 'background25.jpg', 
-    'background26.jpg', 'background27.jpg', 'background28.jpg', 'background29.jpg', 'background30.jpg', 
-    'background31.jpg', 'background32.jpg', 'background33.jpg', 'background34.jpg', 'background35.jpg', 
-    'background36.jpg', 'background37.jpg', 'background38.jpg', 'background39.jpg', 'background40.jpg', 
-    'background41.jpg', 'background42.jpg', 'background43.jpg', 'background44.jpg', 'background45.jpg', 
-    'background46.jpg', 'background47.jpg', 'background48.jpg', 'background49.jpg', 'background50.jpg', 
-    'background51.jpg', 'background52.jpg'
-];
-
-// Configuração dos Sons
-const audioFundo = new Audio('audio/trilha.ogg');
-audioFundo.loop = true;
-const audioAcerto = new Audio('audio/acerto.ogg');
-const audioErro = new Audio('audio/erro.ogg');
-const audioVitoria = new Audio('audio/campeao.ogg');
-const audioCaptura = new Audio('audio/captura.ogg'); 
-
-const keyboardMap = {
-    '2': 'd',
-    '4': 'a',
-    '6': 'c',
-    '8': 'b'
-};
-
-// ----------------------------------------------------------------------
-// FUNÇÕES DE PRELOAD, TELA CHEIA E RESTAURAÇÃO
-// ----------------------------------------------------------------------
-
-function enterFullscreen() {
-    const element = document.documentElement;
-    if (element.requestFullscreen) {
-        element.requestFullscreen();
-    } else if (element.mozRequestFullScreen) {
-        element.mozRequestFullScreen();
-    } else if (element.webkitRequestFullscreen) {
-        element.webkitRequestFullscreen();
-    } else if (element.msRequestFullscreen) {
-        element.msRequestFullscreen();
-    }
-}
-
-function isCurrentlyFullscreen() {
-    return document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
-}
-
-function hidePreloader() {
-    preloader.classList.add('fade-out');
-    setTimeout(() => {
-        preloader.style.display = 'none';
-        conteudo.style.display = 'block';
-    }, 600); 
-}
-
-function loadInitialBackground() {
-    if (bgImages.length === 0) {
-        hidePreloader(); 
-        return;
-    }
-    
-    const randomIndex = Math.floor(Math.random() * bgImages.length);
-    const selectedImage = bgImages[randomIndex];
-    const imageUrlPath = `img/background/${selectedImage}`;
-
-    const img = new Image();
-    img.onload = () => {
-        backgroundElement.style.backgroundImage = `url('${imageUrlPath}')`;
-        hidePreloader();
-    };
-    img.onerror = () => {
-        console.error("Erro ao carregar a imagem de fundo: " + imageUrlPath);
-        hidePreloader();
-    };
-    img.src = imageUrlPath;
-}
-
-function restoreFullscreen() {
-    if (localStorage.getItem('fullscreen_on_reload') === 'true') {
-        enterFullscreen();
-        localStorage.removeItem('fullscreen_on_reload');
-    }
-}
-
-document.addEventListener('DOMContentLoaded', loadInitialBackground);
-document.addEventListener('DOMContentLoaded', restoreFullscreen);
-
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-}
-
-function startGame() {
-    enterFullscreen(); 
-    audioFundo.play().catch(e => console.log("Música de fundo bloqueada."));
-    
-    backgroundElement.classList.add('blurred');
-    startScreen.classList.add('hidden');
-    endGameScreen.classList.add('hidden');
-    gameScreen.classList.remove('hidden');
-    
-    shuffledQuestions = [...quizData];
-    shuffleArray(shuffledQuestions);
-    currentQuestionIndex = 0;
-    score = 0;
-    currentScoreElement.textContent = score;
-
-    lives = 3;
-    updateLifeDisplay();
-
-    displayQuestion();
-}
-
-function updateLifeDisplay() {
-    if (lifeIcons[0]) lifeIcons[0].style.opacity = lives >= 1 ? 1 : 0.2;
-    if (lifeIcons[1]) lifeIcons[1].style.opacity = lives >= 2 ? 1 : 0.2;
-    if (lifeIcons[2]) lifeIcons[2].style.opacity = lives >= 3 ? 1 : 0.2;
-}
-
-function triggerGlitchEffect() {
-    if (!glitchOverlay) return;
-    glitchOverlay.classList.remove('hidden');
-    glitchOverlay.classList.add('glitch-active');
-    
-    if (typeof audioErro !== 'undefined' && audioErro) { 
-        audioErro.currentTime = 0; 
-        audioErro.play().catch(e => console.log("Som de erro bloqueado."));
-    }
-    
-    setTimeout(() => {
-        glitchOverlay.classList.remove('glitch-active');
-        glitchOverlay.classList.add('hidden');
-    }, 200); 
-}
-
-function displayQuestion() {
-    if (currentQuestionIndex >= shuffledQuestions.length) {
-        endGame(false);
-        return;
-    }
-
-    const currentQuestion = shuffledQuestions[currentQuestionIndex];
-    questionText.textContent = currentQuestion.question;
-
-    const options = currentQuestion.options;
-    options.forEach((option, index) => {
-        const button = optionButtons[index];
-        const shortcutKey = Object.keys(keyboardMap).find(key => keyboardMap[key] === button.id.slice(-1));
-        button.innerHTML = `<span>${shortcutKey}</span>${option}`;
-        button.dataset.answer = option;
-        button.onclick = () => checkAnswer(button.dataset.answer);
-    });
-}
-
-function checkAnswer(selectedAnswer) {
-    const currentQuestion = shuffledQuestions[currentQuestionIndex];
-    if (selectedAnswer === currentQuestion.answer) {
-        score++;
-        currentScoreElement.textContent = score;
-        audioAcerto.play();
-        currentQuestionIndex++;
-        displayQuestion();
-    } else {
-        triggerGlitchEffect(); 
-        lives--;              
-        updateLifeDisplay();  
-
-        if (lives <= 0) {
-            endGame(true);
-        } 
-    }
-}
-
-// ----------------------------------------------------------------------
-// END GAME E LÓGICA DE WEBCAM CORRIGIDA
-// ----------------------------------------------------------------------
-
-async function endGame(lost = false) {
-    audioFundo.pause();
-    audioFundo.currentTime = 0;
-
-    gameScreen.classList.add('hidden');
-    endGameScreen.classList.remove('hidden');
-    finalScoreElement.textContent = score;
-    restartButton.classList.add('hidden');
-
-    if (lost) {
-        endGameMessageElement.textContent = `Vidas esgotadas!`;
-    } else {
-        endGameMessageElement.textContent = 'Parabéns, você completou o quiz! 💥';
-        audioVitoria.play();
-    }
-
-    // CORREÇÃO: Garante que qualquer pontuação acima de 0 abra a webcam para o ranking
-    const isTopPlayer = score > 0; 
-
-    if (isTopPlayer) {
-        rankingMessageElement.textContent = 'Você entrou para o ranking! Pose pra foto!';
-        rankingMessageElement.style.fontWeight = 'bold';
-        
-        // Garante que a moldura apareça na tela
-        if (moldura) moldura.style.display = 'block';
-        
-        try {
-            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-            webcamElement.srcObject = stream;
-            webcamElement.classList.remove('hidden'); 
-
-            webcamElement.onloadedmetadata = () => {
-                startPhotoCountdown(stream);
-            };
-        } catch (err) {
-            console.error("Erro ao acessar a webcam: ", err);
-            addToRanking('placeholder.png');
-            rankingMessageElement.textContent = 'Erro na câmera. Seu ranking:';
-            showRanking();
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BORA ESTUDAR: MULHERES NA CIÊNCIA!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00bcd4;
+            --primary-light: #26c6da;
+            --accent: #ff4081;
+            --secondary: #6200ea;
+            --bg-gradient: linear-gradient(135deg, #0d47a1 0%, #00bcd4 100%);
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --text-main: #1a237e;
         }
-    } else {
-        rankingMessageElement.textContent = 'Você não pontuou o suficiente para o ranking. Tente novamente! 😔';
-        if (moldura) moldura.style.display = 'none';
-        showRanking();
-    }
-}
 
-function startPhotoCountdown(stream) {
-    audioCaptura.play().catch(e => console.log("Áudio de captura bloqueado."));
-    
-    let photoTimer = 5;
-    photoCountdownElement.classList.remove('hidden');
-    photoCountdownElement.textContent = photoTimer;
-
-    const interval = setInterval(() => {
-        photoTimer--;
-
-        if (photoTimer > 0) {
-            photoCountdownElement.textContent = photoTimer;
-        } else if (photoTimer === 0) {
-            photoCountdownElement.textContent = '';
-            clearInterval(interval);
-
-            flashScreen();
-
-            setTimeout(() => {
-                takePhoto(stream);
-            }, 300); 
-        } 
-    }, 1000);
-}
-
-function flashScreen() {
-    const flashDiv = document.createElement('div');
-    flashDiv.classList.add('flash-screen');
-    document.body.appendChild(flashDiv);
-
-    setTimeout(() => {
-        flashDiv.remove();
-        photoCountdownElement.classList.add('hidden');
-    }, 300); 
-}
-
-function takePhoto(stream) {
-    canvasElement.width = webcamElement.videoWidth;
-    canvasElement.height = webcamElement.videoHeight;
-    canvasElement.getContext('2d').drawImage(webcamElement, 0, 0, canvasElement.width, canvasElement.height);
-
-    const photoDataUrl = canvasElement.toDataURL('image/jpeg');
-    
-    stream.getTracks().forEach(track => track.stop());
-
-    webcamElement.classList.add('hidden');
-    if (moldura) moldura.style.display = 'none';
-
-    addToRanking(photoDataUrl);
-    rankingMessageElement.textContent = 'Foto capturada! Seu ranking:';
-    showRanking();
-}
-
-function addToRanking(photoDataUrl) {
-    topScores.push({ score, photo: photoDataUrl });
-    topScores.sort((a, b) => b.score - a.score);
-    if (topScores.length > topRankingSize) {
-        topScores.pop();
-    }
-    localStorage.setItem('topScores', JSON.stringify(topScores));
-}
-
-function showRanking() {
-    rankingContainer.innerHTML = '';
-    
-    topScores.forEach((item, index) => {
-        if (index < 5) {
-            const rankingItem = document.createElement('div');
-            rankingItem.classList.add('ranking-item');
-            
-            const photo = document.createElement('img');
-            photo.classList.add('ranking-photo');
-            photo.src = item.photo || 'placeholder.png';
-            
-            const scoreText = document.createElement('span');
-            scoreText.classList.add('ranking-score');
-            scoreText.textContent = `${item.score}`;
-            
-            rankingItem.appendChild(photo);
-            rankingItem.appendChild(scoreText);
-            rankingContainer.appendChild(rankingItem);
+        body.defeat-theme {
+            --primary: #d50000;
+            --primary-light: #ff5252;
+            --secondary: #3e2723;
+            --bg-gradient: linear-gradient(135deg, #263238 0%, #455a64 100%);
+            --accent: #ff1744;
         }
-    });
-    
-    countdownElement.classList.remove('hidden');
-    let countdown = 6; 
-    countdownElement.textContent = `Reiniciando em ${countdown}...`;
-    const interval = setInterval(() => {
-        countdown--;
-        countdownElement.textContent = `Reiniciando em ${countdown}...`;
-        if (countdown <= 0) {
-            clearInterval(interval);
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            margin: 0;
+            padding: 8px;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            transition: background 0.5s ease;
+        }
+
+        .bg-elements {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            overflow: hidden; z-index: 0; pointer-events: none;
+        }
+
+        .floating-icon {
+            position: absolute; opacity: 0.18; user-select: none;
+            animation-timing-function: linear; animation-iteration-count: infinite;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(110vh) translateX(0) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.2; }
+            80% { opacity: 0.2; }
+            100% { transform: translateY(-10vh) translateX(40px) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes floatDown {
+            0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.2; }
+            80% { opacity: 0.2; }
+            100% { transform: translateY(110vh) translateX(-50px) rotate(-360deg); opacity: 0; }
+        }
+
+        @keyframes floatDiagonal {
+            0% { transform: translateY(110vh) translateX(-20vw) rotate(0deg); opacity: 0; }
+            50% { opacity: 0.25; }
+            100% { transform: translateY(-10vh) translateX(20vw) rotate(180deg); opacity: 0; }
+        }
+
+        .game-container {
+            position: relative; z-index: 10; width: 98%; max-width: 1120px;
+            min-height: 75vh; max-height: 98vh;
+            background: var(--card-bg); border-radius: 26px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4), 0 0 0 6px rgba(255, 255, 255, 0.3);
+            padding: 20px 32px; display: flex; flex-direction: column;
+            justify-content: space-between; backdrop-filter: blur(12px);
+            overflow-y: auto;
+        }
+
+        .start-screen {
+            display: flex; flex-direction: column; align-items: center;
+            justify-content: center; text-align: center; flex-grow: 1; padding: 20px;
+        }
+
+        .start-screen h1 {
+            font-family: 'Fredoka', cursive; color: var(--secondary);
+            font-size: 2.2rem; margin-bottom: 15px; text-shadow: 1px 1px 0px #b39ddb; line-height: 1.3;
+        }
+
+        .start-screen p { font-size: 1.1rem; color: #546e7a; max-width: 650px; margin-bottom: 30px; }
+
+        .start-btn {
+            background: linear-gradient(135deg, var(--accent), #f50057); color: white; border: none;
+            padding: 16px 40px; font-family: 'Fredoka', cursive; font-size: 1.4rem;
+            border-radius: 18px; cursor: pointer; box-shadow: 0 6px 0 #880e4f; transition: all 0.2s;
+        }
+        .start-btn:hover { transform: translateY(-3px); box-shadow: 0 9px 0 #560027; }
+
+        .question-box {
+            animation: fadeInQuestion 0.4s ease-in-out; display: flex; flex-direction: column; flex-grow: 1; justify-content: center;
+        }
+
+        @keyframes fadeInQuestion {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .game-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 6px; border-bottom: 2px dashed #b0bec5; padding-bottom: 6px;
+        }
+
+        .game-header h2 {
+            font-family: 'Fredoka', cursive; color: var(--secondary); font-size: 1.5rem; margin: 0; text-shadow: 1px 1px 0px #b39ddb;
+        }
+
+        .badge-stat {
+            background: #e0f7fa; color: var(--secondary); font-family: 'Fredoka', cursive;
+            padding: 5px 14px; border-radius: 18px; font-size: 0.95rem; border: 2px solid var(--primary); box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .progress-bar-container {
+            background-color: #eceff1; border-radius: 10px; height: 10px; width: 100%; margin-bottom: 8px; overflow: hidden; border: 1px solid #cfd8dc;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, var(--primary), var(--secondary)); height: 100%; width: 0%; border-radius: 10px; transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .question-tag { font-family: 'Fredoka', cursive; font-size: 0.85rem; color: var(--accent); text-transform: uppercase; margin-bottom: 2px; letter-spacing: 0.5px; }
+        .question-title { font-family: 'Fredoka', cursive; font-size: 1.15rem; color: var(--text-main); margin-bottom: 12px; line-height: 1.35; }
+
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+        .option-btn {
+            background: #ffffff; border: 2px solid #cfd8dc; border-radius: 14px; padding: 12px 18px;
+            font-family: 'Poppins', sans-serif; font-size: 0.95rem; font-weight: 600; text-align: left; cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); color: #37474f; box-shadow: 0 4px 0 #cfd8dc; display: flex; align-items: center;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            background: #e1f5fe; border-color: var(--primary); color: var(--secondary);
+            transform: translateY(-4px) scale(1.01); box-shadow: 0 8px 15px rgba(0, 188, 212, 0.2), 0 6px 0 #b3e5fc;
+        }
+
+        .option-btn.correct { background: #c8e6c9 !important; border-color: #2e7d32 !important; color: #1b5e20 !important; transform: none !important; }
+        .option-btn.incorrect { background: #ffcdd2 !important; border-color: #c62828 !important; color: #b71c1c !important; transform: none !important; }
+
+        .quiz-footer { display: flex; justify-content: space-between; align-items: center; border-top: 2px solid #eceff1; padding-top: 10px; margin-top: 6px; min-height: 52px; }
+        .feedback-msg { font-family: 'Fredoka', cursive; font-size: 1.1rem; font-weight: 600; }
+
+        .next-btn {
+            background: linear-gradient(135deg, var(--primary), #00838f); color: white; border: none;
+            padding: 10px 28px; font-family: 'Fredoka', cursive; font-size: 1.1rem; border-radius: 14px; cursor: pointer;
+            box-shadow: 0 5px 0 #006064; transition: all 0.2s; display: none;
+        }
+        .next-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 0 #00363a; }
+
+        .score-screen { display: none; text-align: center; padding: 10px; }
+        .score-screen h2 { font-family: 'Fredoka', cursive; color: var(--secondary); font-size: 2rem; margin-bottom: 5px; }
+        .trophy-icon { font-size: 3.5rem; margin: 5px 0; animation: bounce 1s infinite alternate; }
+
+        @keyframes bounce { 0% { transform: translateY(0); } 100% { transform: translateY(-10px); } }
+
+        .score-stats { font-size: 1.2rem; font-weight: 600; color: #37474f; margin: 8px 0; }
+        .score-message { font-size: 1rem; color: #00838f; font-family: 'Fredoka', cursive; margin-bottom: 12px; }
+
+        .ranking-box {
+            background: #f1f8e9; border: 2px solid #aed581; border-radius: 14px;
+            padding: 10px 15px; max-width: 450px; margin: 0 auto 15px auto; text-align: left;
+        }
+        .ranking-box h3 { font-family: 'Fredoka', cursive; color: #33691e; margin: 0 0 8px 0; font-size: 1.1rem; text-align: center; }
+        .ranking-list { list-style: none; padding: 0; margin: 0; }
+        .ranking-item { display: flex; justify-content: space-between; padding: 4px 8px; border-bottom: 1px dashed #dcedc8; font-size: 0.9rem; align-items: center; }
+        .ranking-item:last-child { border-bottom: none; }
+        .ranking-avatar { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; margin-right: 8px; vertical-align: middle; }
+
+        .restart-btn {
+            background: linear-gradient(135deg, var(--secondary), #311b92); color: white; border: none;
+            padding: 12px 32px; font-family: 'Fredoka', cursive; font-size: 1.2rem; border-radius: 16px; cursor: pointer;
+            box-shadow: 0 6px 0 #1a237e; transition: all 0.2s;
+        }
+        .restart-btn:hover { transform: translateY(-3px); box-shadow: 0 9px 0 #0d1b60; }
+
+        .modal-webcam {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85); z-index: 1000; display: none;
+            justify-content: center; align-items: center;
+        }
+        .modal-webcam-content {
+            background: #fff; padding: 25px; border-radius: 20px; text-align: center;
+            max-width: 400px; width: 90%; box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        }
+        .modal-webcam-content h3 { font-family: 'Fredoka', cursive; color: var(--secondary); margin-top: 0; }
+        .modal-webcam-content video { width: 100%; max-height: 250px; border-radius: 12px; background: #000; transform: scaleX(-1); margin-bottom: 15px; }
+        .capture-btn {
+            background: linear-gradient(135deg, #43a047, #2e7d32); color: white; border: none;
+            padding: 10px 24px; font-family: 'Fredoka', cursive; font-size: 1.1rem; border-radius: 12px; cursor: pointer; box-shadow: 0 4px 0 #1b5e20;
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="som-acerto" src="aud/acerto.ogg" preload="auto"></audio>
+    <audio id="som-erro" src="aud/erro.ogg" preload="auto"></audio>
+    <audio id="som-nota-baixa" src="aud/notabaixa.ogg" preload="auto"></audio>
+    <audio id="som-notaboa" src="aud/notaboa.ogg" preload="auto"></audio>
+    <audio id="som-trilha" src="aud/trilha.ogg" loop preload="auto"></audio>
+
+    <div class="bg-elements" id="bg-elements"></div>
+
+    <div class="modal-webcam" id="modal-webcam">
+        <div class="modal-webcam-content">
+            <h3>🎉 NOVO RECORDE NO TOP 3!</h3>
+            <p style="font-size: 0.9rem; color: #546e7a;">Sorria! Vamos tirar uma foto para o Hall da Fama.</p>
+            <video id="webcam-video" autoplay playsinline></video>
+            <br>
+            <button class="capture-btn" onclick="tirarFotoRecorde()">Tirar Foto 📸</button>
+        </div>
+    </div>
+    <canvas id="webcam-canvas" style="display:none;"></canvas>
+
+    <div class="game-container">
+        
+        <div id="start-screen" class="start-screen">
+            <h1>BORA ESTUDAR: MULHERES NA CIÊNCIA!</h1>
+            <p>Teste seus conhecimentos sobre as grandes cientistas da história, suas descobertas e sua importância para a inovação e a tecnologia nessa aventura interativa!</p>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <button class="start-btn" onclick="iniciarJogo()">Começar o Jogo 🚀</button>
+            </div>
+        </div>
+
+        <div id="quiz-screen" style="display: none; flex-direction: column; flex-grow: 1; justify-content: space-between;">
+            <div>
+                <div class="game-header">
+                    <h2>🔬 Quiz Mulheres na Ciência</h2>
+                    <div class="badge-stat" id="score-badge">⭐ 0.0 pts</div>
+                </div>
+
+                <div class="progress-bar-container">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+            </div>
+
+            <div class="question-box" id="question-box-wrapper">
+                <div class="question-tag" id="question-tag">Questão 1 de 16</div>
+                <div class="question-title" id="question-title">Carregando...</div>
+                
+                <div id="dynamic-content-area"></div>
+            </div>
+
+            <div class="quiz-footer">
+                <div class="feedback-msg" id="feedback-msg"></div>
+                <button class="next-btn" id="next-btn" onclick="proximaQuestao()">Próxima 🚀</button>
+            </div>
+        </div>
+
+        <div class="score-screen" id="score-screen">
+            <div class="trophy-icon" id="result-icon">🏆</div>
+            <h2 id="result-title">Fim da Aventura!</h2>
+            <div class="score-stats" id="final-score-text"></div>
+            <div class="score-message" id="final-message"></div>
             
-            if (isCurrentlyFullscreen()) {
-                 localStorage.setItem('fullscreen_on_reload', 'true');
-            } else {
-                 localStorage.removeItem('fullscreen_on_reload');
+            <div class="ranking-box">
+                <h3>🏆 Hall da Fama (Top 3)</h3>
+                <ul class="ranking-list" id="ranking-list">
+                </ul>
+            </div>
+
+            <button class="restart-btn" onclick="reiniciarJogo()">Jogar Novamente 🔄</button>
+        </div>
+    </div>
+
+    <script>
+        const bgSymbols = ['🔬', '🧬', '⚛️', '🧪', '💻', '⭐', '📚', '🚀', '🔭', '💡'];
+        const anims = ['floatUp', 'floatDown', 'floatDiagonal'];
+        const bgContainer = document.getElementById('bg-elements');
+        
+        for (let i = 0; i < 30; i++) {
+            const span = document.createElement('div');
+            span.className = 'floating-icon';
+            span.textContent = bgSymbols[Math.floor(Math.random() * bgSymbols.length)];
+            span.style.left = Math.random() * 100 + 'vw';
+            span.style.fontSize = (Math.random() * 24 + 12) + 'px';
+            span.style.animationName = anims[Math.floor(Math.random() * anims.length)];
+            span.style.animationDuration = (Math.random() * 12 + 8) + 's';
+            span.style.animationDelay = (Math.random() * 8) + 's';
+            bgContainer.appendChild(span);
+        }
+
+        const questoes = [
+            { tag: "Pioneirismo • Física e Química", texto: "Qual cientista ficou famosa por suas pesquisas sobre radioatividade e foi a primeira mulher a ganhar um Prêmio Nobel?", alternativas: [{ texto: "Ada Lovelace", correta: false }, { texto: "Marie Curie", correta: true }, { texto: "Katherine Johnson", correta: false }, { texto: "Rosalind Franklin", correta: false }] },
+            { tag: "Computação • História", texto: "Ada Lovelace é considerada uma pioneira principalmente em qual área?", alternativas: [{ texto: "Medicina", correta: false }, { texto: "Astronomia", correta: false }, { texto: "Programação de computadores", correta: true }, { texto: "Química", correta: false }] },
+            { tag: "Espaço • Matemática", texto: "Katherine Johnson realizou cálculos fundamentais para qual instituição?", alternativas: [{ texto: "NASA", correta: true }, { texto: "UNESCO", correta: false }, { texto: "OMS", correta: false }, { texto: "FIFA", correta: false }] },
+            { tag: "Exploração Espacial", texto: "Os cálculos de Katherine Johnson contribuíram diretamente para:", alternativas: [{ texto: "A criação do primeiro celular", correta: false }, { texto: "Missões espaciais tripuladas", correta: true }, { texto: "A descoberta da penicilina", correta: false }, { texto: "A invenção da televisão", correta: false }] },
+            { tag: "Genética • Biologia Molecular", texto: "Rosalind Franklin teve papel fundamental nos estudos que ajudaram a compreender a estrutura:", alternativas: [{ texto: "Do DNA", correta: true }, { texto: "Do Sol", correta: false }, { texto: "Do átomo de hidrogênio", correta: false }, { texto: "Dos oceanos", correta: false }] },
+            { tag: "Cientistas do Brasil • Genética", texto: "Qual dessas cientistas brasileiras ficou conhecida por seus estudos em genética e divulgação científica?", alternativas: [{ texto: "Marta", correta: false }, { texto: "Mayana Zatz", correta: true }, { texto: "Tarsila do Amaral", correta: false }, { texto: "Cora Coralina", correta: false }] },
+            { tag: "Prêmios Nobel • Marie Curie", texto: "Marie Curie ganhou Prêmios Nobel em duas áreas diferentes. Quais?", alternativas: [{ texto: "Física e Química", correta: true }, { texto: "Matemática e Física", correta: false }, { texto: "Medicina e Biologia", correta: false }, { texto: "Química e Matemática", correta: false }] },
+            { tag: "Ciência no Brasil • Zoologia", texto: "Bertha Lutz, importante cientista brasileira, atuou especialmente na área de:", alternativas: [{ texto: "Zoologia", correta: true }, { texto: "Engenharia espacial", correta: false }, { texto: "Computação", correta: false }, { texto: "Geologia", correta: false }] },
+            { tag: "História da Tecnologia", texto: "Verdadeiro ou falso: Ada Lovelace viveu muito antes dos computadores modernos que usamos atualmente.", alternativas: [{ texto: "Verdadeiro", correta: true }, { texto: "Falso", correta: false }] },
+            { tag: "Educação • Conceito STEM", texto: "Qual destas áreas faz parte da chamada STEM?", alternativas: [{ texto: "Ciência, Tecnologia, Engenharia e Matemática", correta: true }, { texto: "Somente Medicina e Biologia", correta: false }, { texto: "Somente Tecnologia", correta: false }, { texto: "História, Artes e Literatura", correta: false }] },
+            { tag: "Virologia • Pandemia", texto: "Jaqueline Goes de Jesus ganhou destaque durante a pandemia de COVID-19 porque participou:", alternativas: [{ texto: "Da construção de respiradores", correta: false }, { texto: "Do sequenciamento do genoma do coronavírus no Brasil", correta: true }, { texto: "Da criação do primeiro hospital digital", correta: false }, { texto: "Da descoberta da penicilina", correta: false }] },
+            { tag: "Liderança Indígena", texto: "Sônia Guajajara é uma importante liderança indígena brasileira. Sua formação acadêmica inicial é na área de:", alternativas: [{ texto: "Matemática", correta: false }, { texto: "Letras e Enfermagem", correta: true }, { texto: "Engenharia", correta: false }, { texto: "Astronomia", correta: false }] },
+            { tag: "Pesquisa Científica", texto: "A pesquisadora negra brasileira Jaqueline Goes de Jesus tem atuação científica ligada principalmente à:", alternativas: [{ texto: "Biomedicina e genômica", correta: true }, { texto: "Engenharia civil", correta: false }, { texto: "Astronomia", correta: false }, { texto: "Matemática financeira", correta: false }] },
+            { tag: "Saberes Tradicionais", texto: "Mulheres indígenas possuem conhecimentos tradicionais importantes para a ciência. Qual destes é um exemplo?", alternativas: [{ texto: "Conhecimentos sobre plantas, biodiversidade e uso dos recursos naturais", correta: true }, { texto: "Apenas conhecimentos sobre computadores", correta: false }, { texto: "Somente conhecimentos matemáticos", correta: false }, { texto: "Nenhuma das alternativas", correta: false }] },
+            { tag: "Genética e Inclusão", texto: "Qual cientista brasileira ficou conhecida por suas pesquisas sobre doenças genéticas e inclusão?", alternativas: [{ texto: "Mayana Zatz", correta: true }, { texto: "Bertha Lutz", correta: false }, { texto: "Jaqueline Goes de Jesus", correta: false }, { texto: "Sônia Guajajara", correta: false }] },
+            { tag: "Diversidade e Inovação", texto: "Por que é importante incentivar a participação das mulheres na ciência e tecnologia?", alternativas: [{ texto: "Para que apenas mulheres trabalhem nessas áreas", correta: false }, { texto: "Para aumentar a diversidade de ideias e contribuir para novas descobertas", correta: true }, { texto: "Porque homens não podem trabalhar nessas áreas", correta: false }, { texto: "Para substituir outras profissões", correta: false }] }
+        ];
+
+        let indiceAtual = 0;
+        let pontuacaoTotal = 0;
+        let respondido = false;
+        let streamWebcam = null;
+
+        const startScreenEl = document.getElementById("start-screen");
+        const quizScreenEl = document.getElementById("quiz-screen");
+        const scoreScreenEl = document.getElementById("score-screen");
+        const questionTagEl = document.getElementById("question-tag");
+        const questionTitleEl = document.getElementById("question-title");
+        const dynamicContentArea = document.getElementById("dynamic-content-area");
+        const feedbackMsgEl = document.getElementById("feedback-msg");
+        const nextBtnEl = document.getElementById("next-btn");
+        const progressFillEl = document.getElementById("progress-fill");
+        const scoreBadgeEl = document.getElementById("score-badge");
+        const finalScoreTextEl = document.getElementById("final-score-text");
+        const finalMessageEl = document.getElementById("final-message");
+        const questionBoxWrapper = document.getElementById("question-box-wrapper");
+        const resultIconEl = document.getElementById("result-icon");
+        const resultTitleEl = document.getElementById("result-title");
+        const rankingListEl = document.getElementById("ranking-list");
+        const modalWebcamEl = document.getElementById("modal-webcam");
+        const webcamVideoEl = document.getElementById("webcam-video");
+
+        const somAcerto = document.getElementById("som-acerto");
+        const somErro = document.getElementById("som-erro");
+        const somNotaBaixa = document.getElementById("som-notabaixa");
+        const somNotaBoa = document.getElementById("som-notaboa");
+        const somTrilha = document.getElementById("som-trilha");
+
+        function iniciarJogo() {
+            document.body.classList.remove("defeat-theme");
+            startScreenEl.style.display = "none";
+            quizScreenEl.style.display = "flex";
+            
+            somTrilha.currentTime = 0;
+            somTrilha.play().catch(e => console.log("Áudio bloqueado pelo navegador"));
+
+            indiceAtual = 0;
+            pontuacaoTotal = 0;
+            carregarQuestao();
+        }
+
+        function embaralharArray(array) {
+            let arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
             }
+            return arr;
+        }
+
+        function carregarQuestao() {
+            respondido = false;
+            feedbackMsgEl.textContent = "";
+            nextBtnEl.style.display = "none";
+            dynamicContentArea.innerHTML = "";
+
+            questionBoxWrapper.style.animation = 'none';
+            questionBoxWrapper.offsetHeight; 
+            questionBoxWrapper.style.animation = 'fadeInQuestion 0.4s ease-in-out';
+
+            const q = questoes[indiceAtual];
+            questionTagEl.textContent = `Questão ${indiceAtual + 1} de ${questoes.length} • ${q.tag}`;
+            questionTitleEl.textContent = q.texto;
+
+            const progressoPercent = (indiceAtual / questoes.length) * 100;
+            progressFillEl.style.width = `${progressoPercent}%`;
+
+            const alternativasEmbaralhadas = embaralharArray(q.alternativas);
+
+            const gridDiv = document.createElement("div");
+            gridDiv.className = "options-grid";
+            alternativasEmbaralhadas.forEach((alt, idx) => {
+                const btn = document.createElement("button");
+                btn.classList.add("option-btn");
+                const letras = ['A', 'B', 'C', 'D'];
+                btn.innerHTML = `<strong>${letras[idx]})&nbsp;</strong> ${alt.texto}`;
+                btn.onclick = () => selecionarAlternativa(alt, btn, q);
+                gridDiv.appendChild(btn);
+            });
+            dynamicContentArea.appendChild(gridDiv);
+        }
+
+        function selecionarAlternativa(alt, btnElement, q) {
+            if (respondido) return;
+            respondido = true;
+
+            const botoes = dynamicContentArea.querySelectorAll("button");
+            botoes.forEach(b => b.disabled = true);
+
+            const valorPorQuestao = 10 / questoes.length;
+
+            if (alt.correta) {
+                btnElement.classList.add("correct");
+                pontuacaoTotal += valorPorQuestao;
+                feedbackMsgEl.textContent = "🎉 Resposta Correta!";
+                feedbackMsgEl.style.color = "#2e7d32";
+                somAcerto.currentTime = 0;
+                somAcerto.play();
+            } else {
+                btnElement.classList.add("incorrect");
+                feedbackMsgEl.textContent = "❌ Resposta Incorreta!";
+                feedbackMsgEl.style.color = "#c62828";
+                somErro.currentTime = 0;
+                somErro.play();
+
+                botoes.forEach(b => {
+                    const textoBotao = b.textContent.trim();
+                    const corretaTexto = q.alternativas.find(a => a.correta).texto;
+                    if (textoBotao.includes(corretaTexto)) {
+                        b.classList.add("correct");
+                    }
+                });
+            }
+
+            scoreBadgeEl.textContent = `⭐ ${pontuacaoTotal.toFixed(1)} pts`;
+            progressFillEl.style.width = `${((indiceAtual + 1) / questoes.length) * 100}%`;
+            nextBtnEl.style.display = "block";
+        }
+
+        function proximaQuestao() {
+            indiceAtual++;
+            if (indiceAtual < questoes.length) {
+                carregarQuestao();
+            } else {
+                mostrarResultado();
+            }
+        }
+
+        function obterRanking() {
+            let ranking = JSON.parse(localStorage.getItem("quiz_ranking_mulheres")) || [];
+            return ranking;
+        }
+
+        function salvarRanking(ranking) {
+            localStorage.setItem("quiz_ranking_mulheres", JSON.stringify(ranking));
+        }
+
+        function verificarSeEntraNoRanking(pontos) {
+            if (pontos <= 1) return false; 
+            let ranking = obterRanking();
+            if (ranking.length < 3) return true;
+            let menorScore = ranking[ranking.length - 1].pontos;
+            return pontos > menorScore;
+        }
+
+        function mostrarResultado() {
+            quizScreenEl.style.display = "none";
+            scoreScreenEl.style.display = "block";
+
+            somTrilha.pause();
+            somTrilha.currentTime = 0;
+
+            const notaFinal = pontuacaoTotal;
+            finalScoreTextEl.textContent = `Sua nota final foi: ${notaFinal.toFixed(1)} de 10.0`;
+
+            if (notaFinal < 6) {
+                document.body.classList.add("defeat-theme");
+                resultIconEl.textContent = "⚠️";
+                resultTitleEl.textContent = "Quase lá!";
+                finalMessageEl.textContent = "Continue estudando e praticando!";
+                somNotaBaixa.currentTime = 0;
+                somNotaBaixa.play();
+            } else {
+                document.body.classList.remove("defeat-theme");
+                resultIconEl.textContent = "🏆";
+                resultTitleEl.textContent = "Fim da Aventura!";
+                finalMessageEl.textContent = "Parabéns pelo ótimo desempenho!";
+                somNotaBoa.currentTime = 0;
+                somNotaBoa.play();
+            }
+
+            atualizarTelaRanking();
+
+            if (verificarSeEntraNoRanking(notaFinal)) {
+                abrirWebcamParaFoto(notaFinal);
+            }
+        }
+
+        function atualizarTelaRanking(novaFotoBase64 = null, novaPontuacao = null) {
+            let ranking = obterRanking();
+
+            if (novaFotoBase64 !== null && novaPontuacao !== null) {
+                let nome = prompt("Parabéns! Você entrou no Top 3! Digite seu nome:") || "Cientista";
+                ranking.push({ nome: nome, pontos: novaPontuacao, foto: novaFotoBase64 });
+                ranking.sort((a, b) => b.pontos - a.pontos);
+                ranking = ranking.slice(0, 3);
+                salvarRanking(ranking);
+            }
+
+            rankingListEl.innerHTML = "";
+            if (ranking.length === 0) {
+                rankingListEl.innerHTML = `<li class="ranking-item" style="justify-content:center; color:#78909c;">Nenhum recorde ainda. Acima de 1.0 pt entra aqui!</li>`;
+                return;
+            }
+
+            ranking.forEach((item, index) => {
+                let li = document.createElement("li");
+                li.className = "ranking-item";
+                let imgTag = item.foto ? `<img src="${item.foto}" class="ranking-avatar">` : `👤 `;
+                li.innerHTML = `<span>#${index+1} ${imgTag} <strong>${item.nome}</strong></span> <span>⭐ ${item.pontos.toFixed(1)} pts</span>`;
+                rankingListEl.appendChild(li);
+            });
+        }
+
+        async function abrirWebcamParaFoto(pontos) {
+            modalWebcamEl.style.display = "flex";
+            try {
+                streamWebcam = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+                webcamVideoEl.srcObject = streamWebcam;
+            } catch (err) {
+                console.error("Erro detalhado ao acessar a webcam: ", err);
+                alert("Não foi possível acessar a webcam. Verifique se permitiu o acesso à câmera no navegador.");
+                modalWebcamEl.style.display = "none";
+                atualizarTelaRanking(null, pontos); 
+            }
+        }
+
+        function tirarFotoRecorde() {
+            const canvas = document.getElementById("webcam-canvas");
+            canvas.width = webcamVideoEl.videoWidth || 320;
+            canvas.height = webcamVideoEl.videoHeight || 240;
+            const ctx = canvas.getContext("2d");
             
-            window.location.reload(); 
+            ctx.translate(canvas.width, 0);
+            ctx.scale(-1, 1);
+            ctx.drawImage(webcamVideoEl, 0, 0, canvas.width, canvas.height);
+
+            const fotoDataUrl = canvas.toDataURL("image/png");
+
+            if (streamWebcam) {
+                streamWebcam.getTracks().forEach(track => track.stop());
+            }
+
+            modalWebcamEl.style.display = "none";
+            atualizarTelaRanking(fotoDataUrl, pontuacaoTotal);
         }
-    }, 1000);
-}
 
-// Event Listeners
-startButton.addEventListener('click', startGame);
-restartButton.addEventListener('click', startGame);
-
-document.addEventListener('keydown', (e) => {
-    if (gameScreen.classList.contains('hidden')) {
-        return;
-    }
-    const key = e.key;
-    const optionLetter = keyboardMap[key];
-
-    if (optionLetter) {
-        const button = document.getElementById(`option-${optionLetter}`);
-        if (button) {
-            checkAnswer(button.dataset.answer);
+        function reiniciarJogo() {
+            scoreScreenEl.style.display = "none";
+            iniciarJogo();
         }
-    }
-});
-
-document.addEventListener('keydown', (event) => {
-    if (!startScreen.classList.contains('hidden') && (event.key === '5' || event.key === ' ' || event.key === 'Enter')) {
-        startButton.click();
-    }
-});
+    </script>
+</body>
+</html>
