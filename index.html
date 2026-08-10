@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BORA ESTUDAR: AULA GAMIFICAÇÃO DA CULTURA CAPIXABA!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1b5e20;
+            --primary-light: #2e7d32;
+            --accent: #ff8f00;
+            --secondary: #00838f;
+            --bg-gradient: linear-gradient(135deg, #1b5e20 0%, #006064 100%);
+            --card-bg: rgba(255, 255, 255, 0.99);
+            --text-main: #263238;
+        }
+
+        /* Variáveis dinâmicas para tela de derrota */
+        body.defeat-theme {
+            --primary: #b71c1c;
+            --primary-light: #c62828;
+            --secondary: #455a64;
+            --bg-gradient: linear-gradient(135deg, #37474f 0%, #212121 100%);
+            --accent: #d32f2f;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            margin: 0;
+            padding: 8px;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            transition: background 0.5s ease;
+        }
+
+        .bg-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .floating-icon {
+            position: absolute;
+            opacity: 0.18;
+            user-select: none;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(110vh) translateX(0) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.2; }
+            80% { opacity: 0.2; }
+            100% { transform: translateY(-10vh) translateX(40px) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes floatDown {
+            0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.2; }
+            80% { opacity: 0.2; }
+            100% { transform: translateY(110vh) translateX(-50px) rotate(-360deg); opacity: 0; }
+        }
+
+        @keyframes floatDiagonal {
+            0% { transform: translateY(110vh) translateX(-20vw) rotate(0deg); opacity: 0; }
+            50% { opacity: 0.25; }
+            100% { transform: translateY(-10vh) translateX(20vw) rotate(180deg); opacity: 0; }
+        }
+
+        .game-container {
+            position: relative;
+            z-index: 10;
+            width: 98%;
+            max-width: 1120px;
+            min-height: 70vh;
+            max-height: 100vh;
+            background: var(--card-bg);
+            border-radius: 26px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.45), 0 0 0 6px rgba(255, 255, 255, 0.25);
+            padding: 20px 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            backdrop-filter: blur(12px);
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.85); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .start-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            flex-grow: 1;
+            padding: 20px;
+        }
+
+        .start-screen h1 {
+            font-family: 'Fredoka', cursive;
+            color: var(--primary);
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 0px #c8e6c9;
+            line-height: 1.3;
+        }
+
+        .start-screen p {
+            font-size: 1.1rem;
+            color: #546e7a;
+            max-width: 650px;
+            margin-bottom: 30px;
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #ff8f00, #ff6f00);
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            font-family: 'Fredoka', cursive;
+            font-size: 1.4rem;
+            border-radius: 18px;
+            cursor: pointer;
+            box-shadow: 0 6px 0 #e65100;
+            transition: all 0.2s;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 9px 0 #bf360c;
+        }
+
+        .question-box {
+            animation: fadeInQuestion 0.4s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: center;
+        }
+
+        @keyframes fadeInQuestion {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+            border-bottom: 2px dashed #b0bec5;
+            padding-bottom: 6px;
+        }
+
+        .game-header h2 {
+            font-family: 'Fredoka', cursive;
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin: 0;
+            text-shadow: 1px 1px 0px #c8e6c9;
+        }
+
+        .badge-stat {
+            background: #e0f2f1;
+            color: var(--secondary);
+            font-family: 'Fredoka', cursive;
+            padding: 5px 14px;
+            border-radius: 18px;
+            font-size: 0.95rem;
+            border: 2px solid #80deea;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .progress-bar-container {
+            background-color: #eceff1;
+            border-radius: 10px;
+            height: 10px;
+            width: 100%;
+            margin-bottom: 8px;
+            overflow: hidden;
+            border: 1px solid #cfd8dc;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #ffb300, #ff8f00);
+            height: 100%;
+            width: 0%;
+            border-radius: 10px;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .question-tag {
+            font-family: 'Fredoka', cursive;
+            font-size: 0.85rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 2px;
+            letter-spacing: 0.5px;
+        }
+
+        .question-title {
+            font-family: 'Fredoka', cursive;
+            font-size: 1.15rem;
+            color: var(--text-main);
+            margin-bottom: 12px;
+            line-height: 1.35;
+        }
+
+        .media-container {
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .question-image {
+            max-width: 100%;
+            max-height: 380px;
+            width: auto;
+            border-radius: 18px;
+            border: 4px solid var(--primary-light);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+            object-fit: contain;
+            background: #fff;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .question-image:hover {
+            transform: scale(1.02);
+        }
+
+        .split-layout {
+            display: grid;
+            grid-template-columns: 42% 56%;
+            gap: 20px;
+            align-items: center;
+            flex-grow: 1;
+        }
+
+        .split-image-container {
+            text-align: center;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .split-image {
+            max-width: 100%;
+            max-height: 64%;
+            width: auto;
+            border-radius: 18px;
+            border: 4px solid var(--primary-light);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+            object-fit: contain;
+            background: #fff;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .split-image:hover {
+            transform: scale(1.03);
+        }
+
+        .image-hint-legend {
+            font-size: 0.8rem;
+            color: var(--secondary);
+            margin-top: 6px;
+            font-style: italic;
+            font-weight: 600;
+        }
+
+        .split-options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .option-btn {
+            background: #ffffff;
+            border: 2px solid #cfd8dc;
+            border-radius: 14px;
+            padding: 12px 18px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            color: #37474f;
+            box-shadow: 0 4px 0 #cfd8dc;
+            display: flex;
+            align-items: center;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            background: #f1f8e9;
+            border-color: var(--primary-light);
+            color: var(--primary);
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 0 8px 15px rgba(46, 125, 50, 0.2), 0 6px 0 #aed581;
+        }
+
+        .options-grid-images {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+        }
+
+        .image-option-btn {
+            background: #ffffff;
+            border: 3px solid #cfd8dc;
+            border-radius: 18px;
+            padding: 8px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 6px 0 #cfd8dc;
+        }
+
+        .image-option-btn:hover:not(:disabled) {
+            border-color: var(--primary);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(27, 94, 32, 0.25), 0 8px 0 #aed581;
+            background: #f1f8e9;
+        }
+
+        .image-option-btn img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 14px;
+            margin-bottom: 6px;
+            transition: transform 0.3s ease;
+        }
+
+        .image-option-btn:hover img {
+            transform: scale(1.04);
+        }
+
+        .image-option-btn span {
+            font-family: 'Fredoka', cursive;
+            font-size: 0.95rem;
+            color: #37474f;
+            display: block;
+        }
+
+        .option-btn.correct, .image-option-btn.correct {
+            background: #c8e6c9 !important;
+            border-color: #2e7d32 !important;
+            color: #1b5e20 !important;
+            transform: none !important;
+            animation: pulseCorrect 0.4s ease;
+        }
+
+        .option-btn.incorrect, .image-option-btn.incorrect {
+            background: #ffcdd2 !important;
+            border-color: #c62828 !important;
+            color: #b71c1c !important;
+            transform: none !important;
+            animation: shakeIncorrect 0.4s ease;
+        }
+
+        @keyframes pulseCorrect {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes shakeIncorrect {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            75% { transform: translateX(6px); }
+        }
+
+        .quiz-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 2px solid #eceff1;
+            padding-top: 10px;
+            margin-top: 6px;
+            min-height: 52px;
+        }
+
+        .feedback-msg {
+            font-family: 'Fredoka', cursive;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .next-btn {
+            background: linear-gradient(135deg, #ff8f00, #ff6f00);
+            color: white;
+            border: none;
+            padding: 10px 28px;
+            font-family: 'Fredoka', cursive;
+            font-size: 1.1rem;
+            border-radius: 14px;
+            cursor: pointer;
+            box-shadow: 0 5px 0 #e65100;
+            transition: all 0.2s;
+            display: none;
+        }
+
+        .next-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 0 #bf360c;
+        }
+
+        .score-screen {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .score-screen h2 {
+            font-family: 'Fredoka', cursive;
+            color: var(--primary);
+            font-size: 2.4rem;
+            margin-bottom: 8px;
+        }
+
+        .trophy-icon {
+            font-size: 4.5rem;
+            margin: 10px 0;
+            animation: bounce 1s infinite alternate;
+        }
+
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-12px); }
+        }
+
+        .score-stats {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #37474f;
+            margin: 12px 0;
+        }
+
+        .score-message {
+            font-size: 1.1rem;
+            color: #558b2f;
+            font-family: 'Fredoka', cursive;
+            margin-bottom: 18px;
+        }
+
+        body.defeat-theme .score-message {
+            color: #c62828;
+        }
+
+        .restart-btn {
+            background: linear-gradient(135deg, #2e7d32, #1b5e20);
+            color: white;
+            border: none;
+            padding: 12px 32px;
+            font-family: 'Fredoka', cursive;
+            font-size: 1.2rem;
+            border-radius: 16px;
+            cursor: pointer;
+            box-shadow: 0 6px 0 #0f3811;
+            transition: all 0.2s;
+        }
+
+        body.defeat-theme .restart-btn {
+            background: linear-gradient(135deg, #c62828, #b71c1c);
+            box-shadow: 0 6px 0 #5f0f0f;
+        }
+
+        body.defeat-theme .restart-btn:hover {
+            box-shadow: 0 9px 0 #5f0f0f;
+        }
+
+        .restart-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 9px 0 #0f3811;
+        }
+
+        /* Modal para zoom da imagem */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            background: #fff;
+            padding: 15px;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+
+        .modal-content img {
+            max-width: 85vw;
+            max-height: 75vh;
+            border-radius: 12px;
+            object-fit: contain;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            background: #d32f2f;
+            color: #fff;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-family: 'Fredoka', cursive;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="som-acerto" src="aud/acerto.ogg" preload="auto"></audio>
+    <audio id="som-erro" src="aud/erro.ogg" preload="auto"></audio>
+    <audio id="som-nota-baixa" src="aud/notabaixa.ogg" preload="auto"></audio>
+    <audio id="som-notaboa" src="aud/notaboa.ogg" preload="auto"></audio>
+    <audio id="som-trilha" src="aud/trilha.ogg" loop preload="auto"></audio>
+
+    <div class="bg-elements" id="bg-elements"></div>
+
+    <!-- Modal de Zoom de Imagem -->
+    <div class="modal-overlay" id="image-modal" onclick="fecharModalZoom()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="fecharModalZoom()">×</button>
+            <img id="modal-img" src="" alt="Imagem Ampliada">
+        </div>
+    </div>
+
+    <div class="game-container">
+        
+        <div id="start-screen" class="start-screen">
+            <h1>BORA ESTUDAR: AULA GAMIFICAÇÃO DA CULTURA CAPIXABA!</h1>
+            <p>Teste seus conhecimentos sobre a história, geografia, fauna e cultura do Espírito Santo e de Ecoporanga nessa aventura interativa!</p>
+            <button class="start-btn" onclick="iniciarJogo()">Começar o Jogo 🚀</button>
+        </div>
+
+        <div id="quiz-screen" style="display: none; flex-direction: column; flex-grow: 1; justify-content: space-between;">
+            <div>
+                <div class="game-header">
+                    <h2>🎮 Quiz Capixaba</h2>
+                    <div class="badge-stat" id="score-badge">⭐ 0.0 pts</div>
+                </div>
+
+                <div class="progress-bar-container">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+            </div>
+
+            <div class="question-box" id="question-box-wrapper">
+                <div class="question-tag" id="question-tag">Questão 1 de 16</div>
+                <div class="question-title" id="question-title">Carregando...</div>
+                
+                <div id="dynamic-content-area"></div>
+            </div>
+
+            <div class="quiz-footer">
+                <div class="feedback-msg" id="feedback-msg"></div>
+                <button class="next-btn" id="next-btn" onclick="proximaQuestao()">Próxima 🚀</button>
+            </div>
+        </div>
+
+        <div class="score-screen" id="score-screen">
+            <div class="trophy-icon" id="result-icon">🏆</div>
+            <h2 id="result-title">Fim da Aventura!</h2>
+            <div class="score-stats" id="final-score-text"></div>
+            <div class="score-message" id="final-message"></div>
+            <button class="restart-btn" onclick="reiniciarJogo()">Jogar Novamente 🔄</button>
+        </div>
+    </div>
+
+    <script>
+        const bgSymbols = ['🌳', '⛰️', '🗺️', '🦜', '☕', '💧', '🌿', '🏫', '✨', '🇧🇷'];
+        const anims = ['floatUp', 'floatDown', 'floatDiagonal'];
+        const bgContainer = document.getElementById('bg-elements');
+        
+        for (let i = 0; i < 35; i++) {
+            const span = document.createElement('div');
+            span.className = 'floating-icon';
+            span.textContent = bgSymbols[Math.floor(Math.random() * bgSymbols.length)];
+            span.style.left = Math.random() * 100 + 'vw';
+            span.style.fontSize = (Math.random() * 26 + 12) + 'px';
+            
+            const selectedAnim = anims[Math.floor(Math.random() * anims.length)];
+            const duration = Math.random() * 12 + 8;
+            const delay = Math.random() * 8;
+            
+            span.style.animationName = selectedAnim;
+            span.style.animationDuration = duration + 's';
+            span.style.animationDelay = delay + 's';
+            
+            bgContainer.appendChild(span);
+        }
+
+
+        // Função de Pré-carregamento de Imagens
+        function precarregarImagens() {
+            const urlsImagens = [];
+            
+            questoes.forEach(q => {
+                if (q.imagem) urlsImagens.push(q.imagem);
+                if (q.imagemMudanca) urlsImagens.push(q.imagemMudanca);
+                if (q.alternativas) {
+                    q.alternativas.forEach(alt => {
+                        if (alt.imagemAlt) urlsImagens.push(alt.imagemAlt);
+                    });
+                }
+            });
+
+            // Remove duplicadas para evitar baixar a mesma imagem duas vezes
+            const imagensUnicas = [...new Set(urlsImagens)];
+            const totalImagens = imagensUnicas.length;
+            
+            if (totalImagens === 0) {
+                liberarBotaoComecar();
+                return;
+            }
+
+            let carregadas = 0;
+
+            imagensUnicas.forEach(src => {
+                const img = new Image();
+                img.src = src;
+                img.onload = () => {
+                    carregadas++;
+                    atualizarProgressoPreload(carregadas, totalImagens);
+                };
+                img.onerror = () => {
+                    carregadas++;
+                    atualizarProgressoPreload(carregadas, totalImagens);
+                };
+            });
+        }
+
+        function atualizarProgressoPreload(carregadas, total) {
+            const percentual = Math.floor((carregadas / total) * 100);
+            startDescEl.textContent = `Carregando recursos do jogo... (${carregadas}/${total} imagens carregadas)`;
+            startBtnEl.textContent = `Carregando (${percentual}%)...`;
+
+            if (carregadas >= total) {
+                liberarBotaoComecar();
+            }
+        }
+
+        function liberarBotaoComecar() {
+            startDescEl.textContent = "Teste seus conhecimentos sobre a história, geografia, fauna e cultura do Espírito Santo e de Ecoporanga nessa aventura interativa!";
+            startBtnEl.textContent = "Começar o Jogo 🚀";
+            startBtnEl.disabled = false;
+        }
+
+        // Inicia o preload assim que a página abre
+        window.addEventListener("DOMContentLoaded", () => {
+            precarregarImagens();
+        });
+
+
+
+        const questoes = [
+            {
+                num: 1,
+                tag: "Fauna • Mata Atlântica",
+                texto: "No Espírito Santo, encontramos diferentes animais. Qual desses animais possui penas, bico e duas patas?",
+                imagem: "img/animais do es.png",
+                tipo: "texto",
+                alternativas: [
+                    { texto: "Tatu-galinha", correta: false },
+                    { texto: "Teiú", correta: false },
+                    { texto: "Mico-leão-dourado", correta: false },
+                    { texto: "Papagaio-chauá", correta: true }
+                ]
+            },
+            {
+                num: 2,
+                tag: "Classificação dos Animais",
+                texto: "Os animais podem ser organizados em grupos de acordo com suas características externas. Observe:",
+                imagem: "img/animais do es2.png",
+                tipo: "texto",
+                alternativas: [
+                    { texto: "Onça-parda e papagaio-chauá.", correta: false },
+                    { texto: "Papagaio-chauá e teiú.", correta: false },
+                    { texto: "Onça-parda e sagui-da-serra.", correta: true },
+                    { texto: "Teiú e sagui-da-serra.", correta: false }
+                ]
+            },
+            {
+                num: 3,
+                tag: "Símbolos Municipais • Ecoporanga",
+                texto: "Com base nos elementos do Brasão de Ecoporanga, indique os dois animais representados e seus significados:",
+                imagem: "img/simbolos ecoporanga.png",
+                tipo: "texto",
+                alternativas: [
+                    { texto: "O carcará e o cavalo.", correta: false },
+                    { texto: "O inambu (nhambu), associado à origem do nome; e a cabeça de boi, representando a pecuária.", correta: true },
+                    { texto: "A seriema e a cabeça de boi.", correta: false },
+                    { texto: "O tucano e o cavalo.", correta: false }
+                ]
+            },
+            {
+                num: 4,
+                tag: "Árvores Nativas • Imburana",
+                texto: "O distrito de Imburana possui uma árvore famosa na praça. Qual das imagens abaixo representa a imburana?",
+                imagem: "",
+                tipo: "imagem",
+                alternativas: [
+                    { texto: "A", imagemAlt: "img/folhagemmanga.jpg", correta: false },
+                    { texto: "B", imagemAlt: "img/folhagemcafe.jpg", correta: false },
+                    { texto: "C", imagemAlt: "img/folhagemimburana.jpg", correta: true },
+                    { texto: "D", imagemAlt: "img/folhagemgoiabeira.jpg", correta: false }
+                ]
+            },
+            {
+                num: 5,
+                tag: "História • Contestado",
+                texto: "Na década de 1950, na região do 'Contestado', um grupo fundou o Estado União de Jeová. O que foi esse acontecimento?",
+                imagem: "img/Cotaxé - União de Jeová.png",
+                tipo: "split",
+                alternativas: [
+                    { texto: "Uma festa tradicional anual do município.", correta: false },
+                    { texto: "Uma região de disputa territorial entre ES e MG, famosa pela tentativa de criação de um estado independente.", correta: true },
+                    { texto: "O nome de um grande rio que separava Ecoporanga.", correta: false },
+                    { texto: "Uma floresta protegida existente em Minas Gerais.", correta: false }
+                ]
+            },
+            {
+                num: 6,
+                tag: "Cartografia • Ecoporanga",
+                texto: "Observe o mapa distrital e responda: Qual dos distritos abaixo está mais distante de Imburana?",
+                imagem: "img/Mapa de Distritos Ecoporanga.png",
+                tipo: "split",
+                zoomavel: true,
+                alternativas: [
+                    { texto: "Cotaxé.", correta: false },
+                    { texto: "Joaçuba.", correta: false },
+                    { texto: "Santa Luzia do Norte.", correta: false },
+                    { texto: "Prata dos Baianos.", correta: true }
+                ]
+            },
+            {
+                num: 7,
+                tag: "Diversidade Cultural",
+                texto: "Povos indígenas, africanos, portugueses e imigrantes formaram o ES. Por que a chegada deles foi importante?",
+                imagem: "",
+                tipo: "texto",
+                alternativas: [
+                    { texto: "Porque todos os povos tinham exatamente os mesmos costumes.", correta: false },
+                    { texto: "Porque diferentes povos contribuíram com seus costumes, conhecimentos e modos de vida.", correta: true },
+                    { texto: "Porque somente os povos estrangeiros contribuíram.", correta: false },
+                    { texto: "Porque os povos indígenas e africanos não participaram.", correta: false }
+                ]
+            },
+            {
+                num: 8,
+                tag: "Patrimônio e Resistência",
+                texto: "As comunidades quilombolas preservam tradições de antepassados. Por que esses territórios devem ser respeitados?",
+                imagem: "",
+                tipo: "texto",
+                alternativas: [
+                    { texto: "Para preservar sua história e cultura.", correta: true },
+                    { texto: "Para separar as pessoas.", correta: false },
+                    { texto: "Para criar novos municípios.", correta: false },
+                    { texto: "Para aumentar as cidades.", correta: false }
+                ]
+            },
+            {
+                num: 9,
+                tag: "Geografia • Mapas e Maquetes",
+                texto: "Sabendo que um mapa representa um lugar visto de cima, qual descrição representa uma maquete?",
+                imagem: "",
+                tipo: "texto",
+                alternativas: [
+                    { texto: "Uma representação vista de cima.", correta: false },
+                    { texto: "Uma representação com altura, largura e profundidade (três dimensões).", correta: true },
+                    { texto: "Um desenho feito em uma folha.", correta: false },
+                    { texto: "Um ponto marcado em um mapa.", correta: false }
+                ]
+            },
+            {
+                num: 10,
+                tag: "Escala Geográfica",
+                texto: "Fazendo um zoom, saindo do espaço e chegando até o seu lar, qual sequência está correta (do maior para o menor)?",
+                imagem: "",
+                tipo: "texto",
+                alternativas: [
+                    { texto: "🌎 Terra → América do Norte → 🇧🇷 Brasil → Sudeste → ES → Ecoporanga → Imburana", correta: false },
+                    { texto: "🌎 Terra → América do Sul → 🇧🇷 Brasil → Sudeste → Espírito Santo → Ecoporanga → Imburana", correta: true },
+                    { texto: "🇧🇷 Brasil → 🌎 Terra → América do Sul → ES → Ecoporanga → Cotaxé", correta: false },
+                    { texto: "🌎 Terra → 🇧🇷 Brasil → Espírito Santo → América do Sul → Imburana → Ecoporanga", correta: false }
+                ]
+            },
+            {
+                num: 11,
+                tag: "Localização Regional",
+                texto: "Aproximando o mapa a partir do Espírito Santo até chegar ao nosso local de vivência, qual sequência está correta?",
+                imagem: "",
+                tipo: "texto",
+                alternativas: [
+                    { texto: "Espírito Santo → Região Norte do ES → Ecoporanga → Imburana", correta: false },
+                    { texto: "Espírito Santo → Região Sul do ES → Ecoporanga → Imburana", correta: false },
+                    { texto: "Espírito Santo → Região Noroeste do ES → Ecoporanga → Imburana", correta: true },
+                    { texto: "Espírito Santo → Região Metropolitana do ES → Ecoporanga → Imburana", correta: false }
+                ]
+            },
+            {
+                num: 12,
+                tag: "Matemática e Arquitetura",
+                texto: "Na Igreja de São Pedro em Imburana, quais formas geométricas espaciais podemos identificar?",
+                imagem: "img/igreja.png",
+                imagemMudanca: "img/igrejasaopedro.png",
+                tipo: "texto",
+                alternativas: [
+                    { texto: "Esfera e cilindro.", correta: false },
+                    { texto: "Cubo e pirâmide.", correta: false },
+                    { texto: "Prisma retangular e pirâmide.", correta: true },
+                    { texto: "Cilindro e cubo.", correta: false }
+                ]
+            },
+            {
+                num: 13,
+                tag: "Variação Linguística",
+                texto: "A maneira de falar do personagem Chico Bento apresenta características relacionadas principalmente:",
+                imagem: "img/chicobento.png",
+                tipo: "texto",
+                alternativas: [
+                    { texto: "À fala de pessoas que vivem em áreas rurais.", correta: true },
+                    { texto: "À fala usada somente em programas de televisão.", correta: false },
+                    { texto: "À linguagem utilizada em documentos oficiais.", correta: false },
+                    { texto: "À fala de pessoas que vivem em outros países.", correta: false }
+                ]
+            },
+            {
+                num: 14,
+                tag: "Gírias Capixabas",
+                texto: "Leia: 'Nossa, assisti o filme do Miranha, foi massa!' No ES, a gíria 'massa' significa que algo é bom. Isso mostra que:",
+                imagem: "",
+                tipo: "texto",
+                alternativas: [
+                    { texto: "A pessoa achou o filme ruim.", correta: false },
+                    { texto: "A palavra só pode ser usada ao falar de comida.", correta: false },
+                    { texto: "As gírias são palavras proibidas.", correta: false },
+                    { texto: "A pessoa gostou do filme.", correta: true }
+                ]
+            },
+            {
+                num: 15,
+                tag: "Interpretação de Texto",
+                texto: "Texto: 'No sábado, João foi com sua família conhecer o Convento da Penha, em Vila Velha. Subiram até a capela e João tirou fotos.' O que podemos afirmar?",
+                imagem: "",
+                tipo: "texto",
+                alternativas: [
+                    { texto: "Ele foi ao Convento com colegas da escola.", correta: false },
+                    { texto: "Ele visitou o Convento da Penha com sua família.", correta: true },
+                    { texto: "Ele passou o sábado inteiro brincando na praia.", correta: false },
+                    { texto: "Ele conheceu o Convento durante viagem para outro estado.", correta: false }
+                ]
+            },
+            {
+                num: 16,
+                tag: "Meio Ambiente",
+                texto: "O uso do símbolo ⚠️ e das letras em destaque no aviso de lixo tem como principal objetivo:",
+                imagem: "img/lixonochao.jpeg",
+                tipo: "texto",
+                alternativas: [
+                    { texto: "Deixar o texto mais difícil de entender.", correta: false },
+                    { texto: "Chamar a atenção do leitor para a importância do aviso.", correta: true },
+                    { texto: "Mostrar que o texto é uma história engraçada.", correta: false },
+                    { texto: "Indicar que o leitor deve jogar o lixo no chão.", correta: false }
+                ]
+            }
+        ];
+
+        let indiceAtual = 0;
+        let pontuacaoTotal = 0;
+        let respondido = false;
+
+        const startScreenEl = document.getElementById("start-screen");
+        const quizScreenEl = document.getElementById("quiz-screen");
+        const scoreScreenEl = document.getElementById("score-screen");
+        const questionTagEl = document.getElementById("question-tag");
+        const questionTitleEl = document.getElementById("question-title");
+        const dynamicContentArea = document.getElementById("dynamic-content-area");
+        const feedbackMsgEl = document.getElementById("feedback-msg");
+        const nextBtnEl = document.getElementById("next-btn");
+        const progressFillEl = document.getElementById("progress-fill");
+        const scoreBadgeEl = document.getElementById("score-badge");
+        const finalScoreTextEl = document.getElementById("final-score-text");
+        const finalMessageEl = document.getElementById("final-message");
+        const questionBoxWrapper = document.getElementById("question-box-wrapper");
+        const resultIconEl = document.getElementById("result-icon");
+        const resultTitleEl = document.getElementById("result-title");
+
+        const somAcerto = document.getElementById("som-acerto");
+        const somErro = document.getElementById("som-erro");
+        const somNotaBaixa = document.getElementById("som-nota-baixa");
+        const somNotaBoa = document.getElementById("som-notaboa");
+        const somTrilha = document.getElementById("som-trilha");
+
+        function iniciarJogo() {
+            document.body.classList.remove("defeat-theme");
+            startScreenEl.style.display = "none";
+            quizScreenEl.style.display = "flex";
+            
+            somTrilha.currentTime = 0;
+            somTrilha.play().catch(e => console.log("Áudio bloqueado pelo navegador até interação"));
+
+            indiceAtual = 0;
+            pontuacaoTotal = 0;
+            carregarQuestao();
+        }
+
+        function embaralharArray(array) {
+            let arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        function abrirModalZoom(src) {
+            const modal = document.getElementById("image-modal");
+            const modalImg = document.getElementById("modal-img");
+            modalImg.src = src;
+            modal.classList.add("active");
+        }
+
+        function fecharModalZoom() {
+            const modal = document.getElementById("image-modal");
+            modal.classList.remove("active");
+        }
+
+        function carregarQuestao() {
+            respondido = false;
+            feedbackMsgEl.textContent = "";
+            nextBtnEl.style.display = "none";
+            dynamicContentArea.innerHTML = "";
+
+            questionBoxWrapper.style.animation = 'none';
+            questionBoxWrapper.offsetHeight; 
+            questionBoxWrapper.style.animation = 'fadeInQuestion 0.4s ease-in-out';
+
+            const q = questoes[indiceAtual];
+            questionTagEl.textContent = `Questão ${indiceAtual + 1} de ${questoes.length} • ${q.tag}`;
+            questionTitleEl.textContent = q.texto;
+
+            const progressoPercent = (indiceAtual / questoes.length) * 100;
+            progressFillEl.style.width = `${progressoPercent}%`;
+
+            const alternativasEmbaralhadas = embaralharArray(q.alternativas);
+
+            if (q.tipo === "split") {
+                const splitDiv = document.createElement("div");
+                splitDiv.className = "split-layout";
+                
+                let legendHtml = "";
+                let clickAttr = "";
+                if (q.zoomavel) {
+                    legendHtml = `<div class="image-hint-legend">🔍 Clique na imagem para ver ampliado</div>`;
+                    clickAttr = `onclick="abrirModalZoom('${q.imagem}')"`;
+                }
+
+                splitDiv.innerHTML = `
+                    <div class="split-image-container">
+                        <img id="question-image" class="split-image" src="${q.imagem}" alt="Imagem da Questão" ${clickAttr}>
+                        ${legendHtml}
+                    </div>
+                    <div class="split-options-container" id="options-container"></div>
+                `;
+                dynamicContentArea.appendChild(splitDiv);
+
+                const optContainer = document.getElementById("options-container");
+                alternativasEmbaralhadas.forEach((alt, idx) => {
+                    const btn = document.createElement("button");
+                    btn.classList.add("option-btn");
+                    const letras = ['A', 'B', 'C', 'D'];
+                    btn.innerHTML = `<strong>${letras[idx]})&nbsp;</strong> ${alt.texto.replace(/^[A-D]\)\s*/, '')}`;
+                    btn.onclick = () => selecionarAlternativa(alt, btn, q);
+                    optContainer.appendChild(btn);
+                });
+
+            } else if (q.tipo === "imagem") {
+                if (q.imagem) {
+                    const mediaDiv = document.createElement("div");
+                    mediaDiv.className = "media-container";
+                    mediaDiv.innerHTML = `<img id="question-image" class="question-image" src="${q.imagem}" alt="Imagem da Questão">`;
+                    dynamicContentArea.appendChild(mediaDiv);
+                }
+
+                const gridDiv = document.createElement("div");
+                gridDiv.className = "options-grid-images";
+                alternativasEmbaralhadas.forEach((alt) => {
+                    const btn = document.createElement("button");
+                    btn.classList.add("image-option-btn");
+                    btn.innerHTML = `
+                        <img src="${alt.imagemAlt}" alt="Alternativa">
+                        <span>${alt.texto}</span>
+                    `;
+                    btn.onclick = () => selecionarAlternativa(alt, btn, q);
+                    gridDiv.appendChild(btn);
+                });
+                dynamicContentArea.appendChild(gridDiv);
+
+            } else {
+                if (q.imagem) {
+                    let legendHtml = "";
+                    let clickAttr = "";
+                    if (q.zoomavel) {
+                        legendHtml = `<div class="image-hint-legend">🔍 Clique na imagem para ver ampliado</div>`;
+                        clickAttr = `onclick="abrirModalZoom('${q.imagem}')"`;
+                    }
+                    const mediaDiv = document.createElement("div");
+                    mediaDiv.className = "media-container";
+                    mediaDiv.innerHTML = `<img id="question-image" class="question-image" src="${q.imagem}" alt="Imagem da Questão" ${clickAttr}>${legendHtml}`;
+                    dynamicContentArea.appendChild(mediaDiv);
+                }
+
+                const gridDiv = document.createElement("div");
+                gridDiv.className = "options-grid";
+                alternativasEmbaralhadas.forEach((alt, idx) => {
+                    const btn = document.createElement("button");
+                    btn.classList.add("option-btn");
+                    const letras = ['A', 'B', 'C', 'D'];
+                    btn.innerHTML = `<strong>${letras[idx]})&nbsp;</strong> ${alt.texto.replace(/^[A-D]\)\s*/, '')}`;
+                    btn.onclick = () => selecionarAlternativa(alt, btn, q);
+                    gridDiv.appendChild(btn);
+                });
+                dynamicContentArea.appendChild(gridDiv);
+            }
+        }
+
+        function selecionarAlternativa(alt, btnElement, q) {
+            if (respondido) return;
+            respondido = true;
+
+            const botoes = dynamicContentArea.querySelectorAll("button");
+            botoes.forEach(b => b.disabled = true);
+
+            if (q.imagemMudanca) {
+                const imagemEl = document.getElementById("question-image");
+                if (imagemEl) {
+                    imagemEl.src = q.imagemMudanca;
+                }
+            }
+
+            const valorPorQuestao = 10 / questoes.length;
+
+            if (alt.correta) {
+                btnElement.classList.add("correct");
+                pontuacaoTotal += valorPorQuestao;
+                feedbackMsgEl.textContent = "🎉 Resposta Correta!";
+                feedbackMsgEl.style.color = "#2e7d32";
+                somAcerto.currentTime = 0;
+                somAcerto.play();
+            } else {
+                btnElement.classList.add("incorrect");
+                feedbackMsgEl.textContent = "❌ Resposta Incorreta!";
+                feedbackMsgEl.style.color = "#c62828";
+                somErro.currentTime = 0;
+                somErro.play();
+
+                botoes.forEach(b => {
+                    const textoBotao = b.textContent.trim();
+                    const corretaTexto = q.alternativas.find(a => a.correta).texto.replace(/^[A-D]\)\s*/, '');
+                    if (textoBotao.includes(corretaTexto)) {
+                        b.classList.add("correct");
+                    }
+                });
+            }
+
+            scoreBadgeEl.textContent = `⭐ ${pontuacaoTotal.toFixed(1)} pts`;
+            progressFillEl.style.width = `${((indiceAtual + 1) / questoes.length) * 100}%`;
+            nextBtnEl.style.display = "block";
+        }
+
+        function proximaQuestao() {
+            indiceAtual++;
+            if (indiceAtual < questoes.length) {
+                carregarQuestao();
+            } else {
+                mostrarResultado();
+            }
+        }
+
+        function mostrarResultado() {
+            quizScreenEl.style.display = "none";
+            scoreScreenEl.style.display = "block";
+
+            somTrilha.pause();
+            somTrilha.currentTime = 0;
+
+            const notaFinal = pontuacaoTotal;
+            finalScoreTextEl.textContent = `Sua nota final foi: ${notaFinal.toFixed(1)} de 10.0`;
+
+            if (notaFinal < 6) {
+                document.body.classList.add("defeat-theme");
+                resultIconEl.textContent = "⚠️";
+                resultTitleEl.textContent = "Quase lá!";
+                finalMessageEl.textContent = "Continue estudando e praticando! Você consegue melhorar ainda mais!";
+                somNotaBaixa.currentTime = 0;
+                somNotaBaixa.play();
+            } else {
+                document.body.classList.remove("defeat-theme");
+                resultIconEl.textContent = "🏆";
+                resultTitleEl.textContent = "Fim da Aventura!";
+                finalMessageEl.textContent = "Parabéns! Excelente desempenho na nossa aventura cultural!";
+                somNotaBoa.currentTime = 0;
+                somNotaBoa.play();
+            }
+        }
+
+        function reiniciarJogo() {
+            scoreScreenEl.style.display = "none";
+            iniciarJogo();
+        }
+    </script>
+</body>
+</html>
