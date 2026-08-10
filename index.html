@@ -172,7 +172,6 @@
         .score-stats { font-size: 1.2rem; font-weight: 600; color: #37474f; margin: 8px 0; }
         .score-message { font-size: 1rem; color: #00838f; font-family: 'Fredoka', cursive; margin-bottom: 12px; }
 
-        /* Estilo do Ranking */
         .ranking-box {
             background: #f1f8e9; border: 2px solid #aed581; border-radius: 14px;
             padding: 10px 15px; max-width: 450px; margin: 0 auto 15px auto; text-align: left;
@@ -190,7 +189,6 @@
         }
         .restart-btn:hover { transform: translateY(-3px); box-shadow: 0 9px 0 #0d1b60; }
 
-        /* Modal da Webcam */
         .modal-webcam {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.85); z-index: 1000; display: none;
@@ -218,7 +216,6 @@
 
     <div class="bg-elements" id="bg-elements"></div>
 
-    <!-- Modal para Capturar Foto do Recordista -->
     <div class="modal-webcam" id="modal-webcam">
         <div class="modal-webcam-content">
             <h3>🎉 NOVO RECORDE NO TOP 3!</h3>
@@ -235,7 +232,9 @@
         <div id="start-screen" class="start-screen">
             <h1>BORA ESTUDAR: MULHERES NA CIÊNCIA!</h1>
             <p>Teste seus conhecimentos sobre as grandes cientistas da história, suas descobertas e sua importância para a inovação e a tecnologia nessa aventura interativa!</p>
-            <button class="start-btn" onclick="iniciarJogo()">Começar o Jogo 🚀</button>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <button class="start-btn" onclick="iniciarJogo()">Começar o Jogo 🚀</button>
+            </div>
         </div>
 
         <div id="quiz-screen" style="display: none; flex-direction: column; flex-grow: 1; justify-content: space-between;">
@@ -272,7 +271,6 @@
             <div class="ranking-box">
                 <h3>🏆 Hall da Fama (Top 3)</h3>
                 <ul class="ranking-list" id="ranking-list">
-                    <!-- Preenchido via JS -->
                 </ul>
             </div>
 
@@ -456,10 +454,9 @@
         }
 
         function verificarSeEntraNoRanking(pontos) {
-            if (pontos <= 1) return false; // Deve acertar mais de 1 ponto
+            if (pontos <= 1) return false; 
             let ranking = obterRanking();
             if (ranking.length < 3) return true;
-            // Verifica se é maior que o menor score do top 3
             let menorScore = ranking[ranking.length - 1].pontos;
             return pontos > menorScore;
         }
@@ -492,7 +489,6 @@
 
             atualizarTelaRanking();
 
-            // Verifica regra: acertar mais de 1 ponto e entrar no top 3
             if (verificarSeEntraNoRanking(notaFinal)) {
                 abrirWebcamParaFoto(notaFinal);
             }
@@ -504,7 +500,6 @@
             if (novaFotoBase64 !== null && novaPontuacao !== null) {
                 let nome = prompt("Parabéns! Você entrou no Top 3! Digite seu nome:") || "Cientista";
                 ranking.push({ nome: nome, pontos: novaPontuacao, foto: novaFotoBase64 });
-                // Ordena do maior para o menor e pega apenas os 3 primeiros
                 ranking.sort((a, b) => b.pontos - a.pontos);
                 ranking = ranking.slice(0, 3);
                 salvarRanking(ranking);
@@ -531,10 +526,10 @@
                 streamWebcam = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
                 webcamVideoEl.srcObject = streamWebcam;
             } catch (err) {
-                console.error("Erro ao acessar a webcam: ", err);
-                alert("Não foi possível acessar a webcam para tirar a foto do recorde.");
+                console.error("Erro detalhado ao acessar a webcam: ", err);
+                alert("Não foi possível acessar a webcam. Verifique se permitiu o acesso à câmera no navegador.");
                 modalWebcamEl.style.display = "none";
-                atualizarTelaRanking(null, pontos); // Adiciona sem foto se der erro na câmera
+                atualizarTelaRanking(null, pontos); 
             }
         }
 
@@ -544,14 +539,12 @@
             canvas.height = webcamVideoEl.videoHeight || 240;
             const ctx = canvas.getContext("2d");
             
-            // Inverte a imagem horizontalmente no canvas para coincidir com o espelho do vídeo
             ctx.translate(canvas.width, 0);
             ctx.scale(-1, 1);
             ctx.drawImage(webcamVideoEl, 0, 0, canvas.width, canvas.height);
 
             const fotoDataUrl = canvas.toDataURL("image/png");
 
-            // Parar a webcam
             if (streamWebcam) {
                 streamWebcam.getTracks().forEach(track => track.stop());
             }
