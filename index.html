@@ -45,21 +45,13 @@
 
         .bg-elements {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 0;
-            pointer-events: none;
+            top: 0; left: 0; width: 100%; height: 100%;
+            overflow: hidden; z-index: 0; pointer-events: none;
         }
 
         .floating-icon {
-            position: absolute;
-            opacity: 0.18;
-            user-select: none;
-            animation-timing-function: linear;
-            animation-iteration-count: infinite;
+            position: absolute; opacity: 0.18; user-select: none;
+            animation-timing-function: linear; animation-iteration-count: infinite;
         }
 
         @keyframes floatUp {
@@ -83,78 +75,36 @@
         }
 
         .game-container {
-            position: relative;
-            z-index: 10;
-            width: 98%;
-            max-width: 1120px;
-            min-height: 70vh;
-            max-height: 100vh;
-            background: var(--card-bg);
-            border-radius: 26px;
+            position: relative; z-index: 10; width: 98%; max-width: 1120px;
+            min-height: 75vh; max-height: 98vh;
+            background: var(--card-bg); border-radius: 26px;
             box-shadow: 0 25px 50px rgba(0,0,0,0.4), 0 0 0 6px rgba(255, 255, 255, 0.3);
-            padding: 20px 32px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            backdrop-filter: blur(12px);
-            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        }
-
-        @keyframes popIn {
-            0% { transform: scale(0.85); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
+            padding: 20px 32px; display: flex; flex-direction: column;
+            justify-content: space-between; backdrop-filter: blur(12px);
+            overflow-y: auto;
         }
 
         .start-screen {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            flex-grow: 1;
-            padding: 20px;
+            display: flex; flex-direction: column; align-items: center;
+            justify-content: center; text-align: center; flex-grow: 1; padding: 20px;
         }
 
         .start-screen h1 {
-            font-family: 'Fredoka', cursive;
-            color: var(--secondary);
-            font-size: 2.2rem;
-            margin-bottom: 15px;
-            text-shadow: 1px 1px 0px #b39ddb;
-            line-height: 1.3;
+            font-family: 'Fredoka', cursive; color: var(--secondary);
+            font-size: 2.2rem; margin-bottom: 15px; text-shadow: 1px 1px 0px #b39ddb; line-height: 1.3;
         }
 
-        .start-screen p {
-            font-size: 1.1rem;
-            color: #546e7a;
-            max-width: 650px;
-            margin-bottom: 30px;
-        }
+        .start-screen p { font-size: 1.1rem; color: #546e7a; max-width: 650px; margin-bottom: 30px; }
 
         .start-btn {
-            background: linear-gradient(135deg, var(--accent), #f50057);
-            color: white;
-            border: none;
-            padding: 16px 40px;
-            font-family: 'Fredoka', cursive;
-            font-size: 1.4rem;
-            border-radius: 18px;
-            cursor: pointer;
-            box-shadow: 0 6px 0 #880e4f;
-            transition: all 0.2s;
+            background: linear-gradient(135deg, var(--accent), #f50057); color: white; border: none;
+            padding: 16px 40px; font-family: 'Fredoka', cursive; font-size: 1.4rem;
+            border-radius: 18px; cursor: pointer; box-shadow: 0 6px 0 #880e4f; transition: all 0.2s;
         }
-
-        .start-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 9px 0 #560027;
-        }
+        .start-btn:hover { transform: translateY(-3px); box-shadow: 0 9px 0 #560027; }
 
         .question-box {
-            animation: fadeInQuestion 0.4s ease-in-out;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-            justify-content: center;
+            animation: fadeInQuestion 0.4s ease-in-out; display: flex; flex-direction: column; flex-grow: 1; justify-content: center;
         }
 
         @keyframes fadeInQuestion {
@@ -163,292 +113,98 @@
         }
 
         .game-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 6px;
-            border-bottom: 2px dashed #b0bec5;
-            padding-bottom: 6px;
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 6px; border-bottom: 2px dashed #b0bec5; padding-bottom: 6px;
         }
 
         .game-header h2 {
-            font-family: 'Fredoka', cursive;
-            color: var(--secondary);
-            font-size: 1.5rem;
-            margin: 0;
-            text-shadow: 1px 1px 0px #b39ddb;
+            font-family: 'Fredoka', cursive; color: var(--secondary); font-size: 1.5rem; margin: 0; text-shadow: 1px 1px 0px #b39ddb;
         }
 
         .badge-stat {
-            background: #e0f7fa;
-            color: var(--secondary);
-            font-family: 'Fredoka', cursive;
-            padding: 5px 14px;
-            border-radius: 18px;
-            font-size: 0.95rem;
-            border: 2px solid var(--primary);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            background: #e0f7fa; color: var(--secondary); font-family: 'Fredoka', cursive;
+            padding: 5px 14px; border-radius: 18px; font-size: 0.95rem; border: 2px solid var(--primary); box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
         .progress-bar-container {
-            background-color: #eceff1;
-            border-radius: 10px;
-            height: 10px;
-            width: 100%;
-            margin-bottom: 8px;
-            overflow: hidden;
-            border: 1px solid #cfd8dc;
+            background-color: #eceff1; border-radius: 10px; height: 10px; width: 100%; margin-bottom: 8px; overflow: hidden; border: 1px solid #cfd8dc;
         }
 
         .progress-fill {
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            height: 100%;
-            width: 0%;
-            border-radius: 10px;
-            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(90deg, var(--primary), var(--secondary)); height: 100%; width: 0%; border-radius: 10px; transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .question-tag {
-            font-family: 'Fredoka', cursive;
-            font-size: 0.85rem;
-            color: var(--accent);
-            text-transform: uppercase;
-            margin-bottom: 2px;
-            letter-spacing: 0.5px;
-        }
+        .question-tag { font-family: 'Fredoka', cursive; font-size: 0.85rem; color: var(--accent); text-transform: uppercase; margin-bottom: 2px; letter-spacing: 0.5px; }
+        .question-title { font-family: 'Fredoka', cursive; font-size: 1.15rem; color: var(--text-main); margin-bottom: 12px; line-height: 1.35; }
 
-        .question-title {
-            font-family: 'Fredoka', cursive;
-            font-size: 1.15rem;
-            color: var(--text-main);
-            margin-bottom: 12px;
-            line-height: 1.35;
-        }
-
-        .media-container {
-            text-align: center;
-            margin-bottom: 12px;
-        }
-
-        .question-image {
-            max-width: 100%;
-            max-height: 380px;
-            width: auto;
-            border-radius: 18px;
-            border: 4px solid var(--primary-light);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
-            object-fit: contain;
-            background: #fff;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .options-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
         .option-btn {
-            background: #ffffff;
-            border: 2px solid #cfd8dc;
-            border-radius: 14px;
-            padding: 12px 18px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 600;
-            text-align: left;
-            cursor: pointer;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            color: #37474f;
-            box-shadow: 0 4px 0 #cfd8dc;
-            display: flex;
-            align-items: center;
+            background: #ffffff; border: 2px solid #cfd8dc; border-radius: 14px; padding: 12px 18px;
+            font-family: 'Poppins', sans-serif; font-size: 0.95rem; font-weight: 600; text-align: left; cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); color: #37474f; box-shadow: 0 4px 0 #cfd8dc; display: flex; align-items: center;
         }
 
         .option-btn:hover:not(:disabled) {
-            background: #e1f5fe;
-            border-color: var(--primary);
-            color: var(--secondary);
-            transform: translateY(-4px) scale(1.01);
-            box-shadow: 0 8px 15px rgba(0, 188, 212, 0.2), 0 6px 0 #b3e5fc;
+            background: #e1f5fe; border-color: var(--primary); color: var(--secondary);
+            transform: translateY(-4px) scale(1.01); box-shadow: 0 8px 15px rgba(0, 188, 212, 0.2), 0 6px 0 #b3e5fc;
         }
 
-        .option-btn.correct {
-            background: #c8e6c9 !important;
-            border-color: #2e7d32 !important;
-            color: #1b5e20 !important;
-            transform: none !important;
-            animation: pulseCorrect 0.4s ease;
-        }
+        .option-btn.correct { background: #c8e6c9 !important; border-color: #2e7d32 !important; color: #1b5e20 !important; transform: none !important; }
+        .option-btn.incorrect { background: #ffcdd2 !important; border-color: #c62828 !important; color: #b71c1c !important; transform: none !important; }
 
-        .option-btn.incorrect {
-            background: #ffcdd2 !important;
-            border-color: #c62828 !important;
-            color: #b71c1c !important;
-            transform: none !important;
-            animation: shakeIncorrect 0.4s ease;
-        }
-
-        @keyframes pulseCorrect {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        @keyframes shakeIncorrect {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-6px); }
-            75% { transform: translateX(6px); }
-        }
-
-        .quiz-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 2px solid #eceff1;
-            padding-top: 10px;
-            margin-top: 6px;
-            min-height: 52px;
-        }
-
-        .feedback-msg {
-            font-family: 'Fredoka', cursive;
-            font-size: 1.1rem;
-            font-weight: 600;
-        }
+        .quiz-footer { display: flex; justify-content: space-between; align-items: center; border-top: 2px solid #eceff1; padding-top: 10px; margin-top: 6px; min-height: 52px; }
+        .feedback-msg { font-family: 'Fredoka', cursive; font-size: 1.1rem; font-weight: 600; }
 
         .next-btn {
-            background: linear-gradient(135deg, var(--primary), #00838f);
-            color: white;
-            border: none;
-            padding: 10px 28px;
-            font-family: 'Fredoka', cursive;
-            font-size: 1.1rem;
-            border-radius: 14px;
-            cursor: pointer;
-            box-shadow: 0 5px 0 #006064;
-            transition: all 0.2s;
-            display: none;
+            background: linear-gradient(135deg, var(--primary), #00838f); color: white; border: none;
+            padding: 10px 28px; font-family: 'Fredoka', cursive; font-size: 1.1rem; border-radius: 14px; cursor: pointer;
+            box-shadow: 0 5px 0 #006064; transition: all 0.2s; display: none;
         }
+        .next-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 0 #00363a; }
 
-        .next-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 0 #00363a;
-        }
+        .score-screen { display: none; text-align: center; padding: 10px; }
+        .score-screen h2 { font-family: 'Fredoka', cursive; color: var(--secondary); font-size: 2rem; margin-bottom: 5px; }
+        .trophy-icon { font-size: 3.5rem; margin: 5px 0; animation: bounce 1s infinite alternate; }
 
-        .score-screen {
-            display: none;
-            text-align: center;
-            padding: 20px;
-        }
+        @keyframes bounce { 0% { transform: translateY(0); } 100% { transform: translateY(-10px); } }
 
-        .score-screen h2 {
-            font-family: 'Fredoka', cursive;
-            color: var(--secondary);
-            font-size: 2.4rem;
-            margin-bottom: 8px;
-        }
+        .score-stats { font-size: 1.2rem; font-weight: 600; color: #37474f; margin: 8px 0; }
+        .score-message { font-size: 1rem; color: #00838f; font-family: 'Fredoka', cursive; margin-bottom: 12px; }
 
-        .trophy-icon {
-            font-size: 4.5rem;
-            margin: 10px 0;
-            animation: bounce 1s infinite alternate;
+        /* Estilo do Ranking */
+        .ranking-box {
+            background: #f1f8e9; border: 2px solid #aed581; border-radius: 14px;
+            padding: 10px 15px; max-width: 450px; margin: 0 auto 15px auto; text-align: left;
         }
-
-        @keyframes bounce {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-12px); }
-        }
-
-        .score-stats {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #37474f;
-            margin: 12px 0;
-        }
-
-        .score-message {
-            font-size: 1.1rem;
-            color: #00838f;
-            font-family: 'Fredoka', cursive;
-            margin-bottom: 18px;
-        }
-
-        body.defeat-theme .score-message {
-            color: #c62828;
-        }
+        .ranking-box h3 { font-family: 'Fredoka', cursive; color: #33691e; margin: 0 0 8px 0; font-size: 1.1rem; text-align: center; }
+        .ranking-list { list-style: none; padding: 0; margin: 0; }
+        .ranking-item { display: flex; justify-content: space-between; padding: 4px 8px; border-bottom: 1px dashed #dcedc8; font-size: 0.9rem; align-items: center; }
+        .ranking-item:last-child { border-bottom: none; }
+        .ranking-avatar { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; margin-right: 8px; vertical-align: middle; }
 
         .restart-btn {
-            background: linear-gradient(135deg, var(--secondary), #311b92);
-            color: white;
-            border: none;
-            padding: 12px 32px;
-            font-family: 'Fredoka', cursive;
-            font-size: 1.2rem;
-            border-radius: 16px;
-            cursor: pointer;
-            box-shadow: 0 6px 0 #1a237e;
-            transition: all 0.2s;
+            background: linear-gradient(135deg, var(--secondary), #311b92); color: white; border: none;
+            padding: 12px 32px; font-family: 'Fredoka', cursive; font-size: 1.2rem; border-radius: 16px; cursor: pointer;
+            box-shadow: 0 6px 0 #1a237e; transition: all 0.2s;
         }
+        .restart-btn:hover { transform: translateY(-3px); box-shadow: 0 9px 0 #0d1b60; }
 
-        .restart-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 9px 0 #0d1b60;
+        /* Modal da Webcam */
+        .modal-webcam {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85); z-index: 1000; display: none;
+            justify-content: center; align-items: center;
         }
-
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            z-index: 1000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
+        .modal-webcam-content {
+            background: #fff; padding: 25px; border-radius: 20px; text-align: center;
+            max-width: 400px; width: 90%; box-shadow: 0 15px 35px rgba(0,0,0,0.5);
         }
-
-        .modal-overlay.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .modal-content {
-            position: relative;
-            max-width: 90vw;
-            max-height: 90vh;
-            background: #fff;
-            padding: 15px;
-            border-radius: 18px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            text-align: center;
-        }
-
-        .modal-content img {
-            max-width: 85vw;
-            max-height: 75vh;
-            border-radius: 12px;
-            object-fit: contain;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: -12px;
-            right: -12px;
-            background: #d32f2f;
-            color: #fff;
-            border: none;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            font-family: 'Fredoka', cursive;
-            font-size: 1.2rem;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        .modal-webcam-content h3 { font-family: 'Fredoka', cursive; color: var(--secondary); margin-top: 0; }
+        .modal-webcam-content video { width: 100%; max-height: 250px; border-radius: 12px; background: #000; transform: scaleX(-1); margin-bottom: 15px; }
+        .capture-btn {
+            background: linear-gradient(135deg, #43a047, #2e7d32); color: white; border: none;
+            padding: 10px 24px; font-family: 'Fredoka', cursive; font-size: 1.1rem; border-radius: 12px; cursor: pointer; box-shadow: 0 4px 0 #1b5e20;
         }
     </style>
 </head>
@@ -462,12 +218,17 @@
 
     <div class="bg-elements" id="bg-elements"></div>
 
-    <div class="modal-overlay" id="image-modal" onclick="fecharModalZoom()">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <button class="modal-close" onclick="fecharModalZoom()">×</button>
-            <img id="modal-img" src="" alt="Imagem Ampliada">
+    <!-- Modal para Capturar Foto do Recordista -->
+    <div class="modal-webcam" id="modal-webcam">
+        <div class="modal-webcam-content">
+            <h3>🎉 NOVO RECORDE NO TOP 3!</h3>
+            <p style="font-size: 0.9rem; color: #546e7a;">Sorria! Vamos tirar uma foto para o Hall da Fama.</p>
+            <video id="webcam-video" autoplay playsinline></video>
+            <br>
+            <button class="capture-btn" onclick="tirarFotoRecorde()">Tirar Foto 📸</button>
         </div>
     </div>
+    <canvas id="webcam-canvas" style="display:none;"></canvas>
 
     <div class="game-container">
         
@@ -507,6 +268,14 @@
             <h2 id="result-title">Fim da Aventura!</h2>
             <div class="score-stats" id="final-score-text"></div>
             <div class="score-message" id="final-message"></div>
+            
+            <div class="ranking-box">
+                <h3>🏆 Hall da Fama (Top 3)</h3>
+                <ul class="ranking-list" id="ranking-list">
+                    <!-- Preenchido via JS -->
+                </ul>
+            </div>
+
             <button class="restart-btn" onclick="reiniciarJogo()">Jogar Novamente 🔄</button>
         </div>
     </div>
@@ -516,220 +285,41 @@
         const anims = ['floatUp', 'floatDown', 'floatDiagonal'];
         const bgContainer = document.getElementById('bg-elements');
         
-        for (let i = 0; i < 35; i++) {
+        for (let i = 0; i < 30; i++) {
             const span = document.createElement('div');
             span.className = 'floating-icon';
             span.textContent = bgSymbols[Math.floor(Math.random() * bgSymbols.length)];
             span.style.left = Math.random() * 100 + 'vw';
-            span.style.fontSize = (Math.random() * 26 + 12) + 'px';
-            
-            const selectedAnim = anims[Math.floor(Math.random() * anims.length)];
-            const duration = Math.random() * 12 + 8;
-            const delay = Math.random() * 8;
-            
-            span.style.animationName = selectedAnim;
-            span.style.animationDuration = duration + 's';
-            span.style.animationDelay = delay + 's';
-            
+            span.style.fontSize = (Math.random() * 24 + 12) + 'px';
+            span.style.animationName = anims[Math.floor(Math.random() * anims.length)];
+            span.style.animationDuration = (Math.random() * 12 + 8) + 's';
+            span.style.animationDelay = (Math.random() * 8) + 's';
             bgContainer.appendChild(span);
         }
 
         const questoes = [
-            {
-                num: 1,
-                tag: "Pioneirismo • Física e Química",
-                texto: "Qual cientista ficou famosa por suas pesquisas sobre radioatividade e foi a primeira mulher a ganhar um Prêmio Nobel?",
-                tipo: "texto",
-                alternativas: [
-                    { texto: "Ada Lovelace", correta: false },
-                    { texto: "Marie Curie", correta: true },
-                    { texto: "Katherine Johnson", correta: false },
-                    { texto: "Rosalind Franklin", correta: false }
-                ]
-            },
-            {
-                num: 2,
-                tag: "Computação • História",
-                texto: "Ada Lovelace é considerada uma pioneira principalmente em qual área?",
-                tipo: "texto",
-                alternativas: [
-                    { texto: "Medicina", correta: false },
-                    { texto: "Astronomia", correta: false },
-                    { texto: "Programação de computadores", correta: true },
-                    { texto: "Química", correta: false }
-                ]
-            },
-            {
-                num: 3,
-                tag: "Espaço • Matemática",
-                texto: "Katherine Johnson realizou cálculos fundamentais para qual instituição?",
-                tipo: "texto",
-                alternativas: [
-                    { texto: "NASA", correta: true },
-                    { texto: "UNESCO", correta: false },
-                    { texto: "OMS", correta: false },
-                    { texto: "FIFA", correta: false }
-                ]
-            },
-            {
-                num: 4,
-                tag: "Exploração Espacial",
-                texto: "Os cálculos de Katherine Johnson contribuíram diretamente para:",
-                tipo: "texto",
-                alternativas: [
-                    { texto: "A criação do primeiro celular", correta: false },
-                    { texto: "Missões espaciais tripuladas", correta: true },
-                    { texto: "A descoberta da penicilina", correta: false },
-                    { texto: "A invenção da televisão", correta: false }
-                ]
-            },
-            {
-                num: 5,
-                tag: "Genética • Biologia Molecular",
-                texto: "Rosalind Franklin teve papel fundamental nos estudos que ajudaram a compreender a estrutura:",
-                tipo: "texto",
-                alternativas: [
-                    { texto: "Do DNA", correta: true },
-                    { texto: "Do Sol", correta: false },
-                    { texto: "Do átomo de hidrogênio", correta: false },
-                    { texto: "Dos oceanos", correta: false }
-                ]
-            },
-            {
-                num: 6,
-                tag: "Cientistas do Brasil • Genética",
-                texto: "Qual dessas cientistas brasileiras ficou conhecida por seus estudos em genética e por sua atuação na divulgação científica?",
-                tipo: "texto",
-                alternativas: [
-                    { texto: "Marta", correta: false },
-                    { texto: "Mayana Zatz", correta: true },
-                    { texto: "Tarsila do Amaral", correta: false },
-                    { texto: "Cora Coralina", correta: false }
-                ]
-            },
-            {
-                num: 7,
-                tag: "Prêmios Nobel • Marie Curie",
-                texto: "Marie Curie ganhou Prêmios Nobel em duas áreas diferentes. Quais?",
-                tipo: "texto",
-                alternativas: [
-                    { texto: "Física e Química", correta: true },
-                    { texto: "Matemática e Física", correta: false },
-                    { texto: "Medicina e Biologia", correta: false },
-                    { texto: "Química e Matemática", correta: false }
-                ]
-            },
-            {
-                num: 8,
-                tag: "Ciência no Brasil • Zoologia",
-                texto: "Bertha Lutz, importante cientista brasileira, atuou especialmente na área de:",
-                tipo: "texto",
-                alternativas: [
-                    { texto: "Zoologia", correta: true },
-                    { texto: "Engenharia espacial", correta: false },
-                    { texto: "Computação", correta: false },
-                    { texto: "Geologia", correta: false }
-                ]
-            },
-            {
-                num: 9,
-                tag: "História da Tecnologia",
-                texto: "Verdadeiro ou falso: Ada Lovelace viveu muito antes dos computadores modernos que usamos atualmente.",
-                tipo: "texto",
-                alternativas: [
-                    { texto: "Verdadeiro", correta: true },
-                    { texto: "Falso", correta: false }
-                ]
-            },
-            {
-                num: 10,
-                tag: "Educação • Conceito STEM",
-                texto: "Qual destas áreas faz parte da chamada STEM?",
-                tipo: "texto",
-                alternativas: [
-                    { texto: "Ciência, Tecnologia, Engenharia e Matemática", correta: true },
-                    { texto: "Somente Medicina e Biologia", correta: false },
-                    { texto: "Somente Tecnologia", correta: false },
-                    { texto: "História, Artes e Literatura", correta: false }
-                ]
-            },
-            {
-                num: 11,
-                tag: "Virologia • Pandemia",
-                texto: "Jaqueline Goes de Jesus ganhou destaque durante a pandemia de COVID-19 porque participou:",
-                tipo: "texto",
-                alternativas: [
-                    { texto: "Da construção de respiradores", correta: false },
-                    { texto: "Do sequenciamento do genoma do coronavírus no Brasil", correta: true },
-                    { texto: "Da criação do primeiro hospital digital", correta: false },
-                    { texto: "Da descoberta da penicilina", correta: false }
-                ]
-            },
-            {
-                num: 12,
-                tag: "Liderança Indígena e Acadêmica",
-                texto: "Sônia Guajajara é uma importante liderança indígena brasileira. Sua formação acadêmica inicial é na área de:",
-                tipo: "texto",
-                alternativas: [
-                    { texto: "Matemática", correta: false },
-                    { texto: "Letras e Enfermagem", correta: true },
-                    { texto: "Engenharia", correta: false },
-                    { texto: "Astronomia", correta: false }
-                ]
-            },
-            {
-                num: 13,
-                tag: "Pesquisa Científica no Brasil",
-                texto: "A pesquisadora negra brasileira Jaqueline Goes de Jesus tem formação e atuação científica ligada principalmente à:",
-                tipo: "texto",
-                alternativas: [
-                    { texto: "Biomedicina e genômica", correta: true },
-                    { texto: "Engenharia civil", correta: false },
-                    { texto: "Astronomia", correta: false },
-                    { texto: "Matemática financeira", correta: false }
-                ]
-            },
-            {
-                num: 14,
-                tag: "Saberes Tradicionais",
-                texto: "Mulheres indígenas possuem conhecimentos tradicionais importantes para diferentes áreas da ciência. Qual destes é um exemplo?",
-                tipo: "texto",
-                alternativas: [
-                    { texto: "Conhecimentos sobre plantas, biodiversidade e uso dos recursos naturais", correta: true },
-                    { texto: "Apenas conhecimentos sobre computadores", correta: false },
-                    { texto: "Somente conhecimentos matemáticos", correta: false },
-                    { texto: "Nenhuma das alternativas", correta: false }
-                ]
-            },
-            {
-                num: 15,
-                tag: "Genética e Inclusão",
-                texto: "Qual cientista brasileira ficou conhecida internacionalmente por suas pesquisas sobre doenças genéticas e por defender a inclusão de pessoas com deficiência na ciência?",
-                tipo: "texto",
-                alternativas: [
-                    { texto: "Mayana Zatz", correta: true },
-                    { texto: "Bertha Lutz", correta: false },
-                    { texto: "Jaqueline Goes de Jesus", correta: false },
-                    { texto: "Sônia Guajajara", correta: false }
-                ]
-            },
-            {
-                num: 16,
-                tag: "Diversidade e Inovação",
-                texto: "Por que é importante incentivar a participação das mulheres na ciência e na tecnologia?",
-                tipo: "texto",
-                alternativas: [
-                    { texto: "Para que apenas mulheres possam trabalhar nessas áreas", correta: false },
-                    { texto: "Para aumentar a diversidade de ideias e contribuir para novas descobertas", correta: true },
-                    { texto: "Porque homens não podem mais trabalhar nessas áreas", correta: false },
-                    { texto: "Para substituir outras profissões", correta: false }
-                ]
-            }
+            { tag: "Pioneirismo • Física e Química", texto: "Qual cientista ficou famosa por suas pesquisas sobre radioatividade e foi a primeira mulher a ganhar um Prêmio Nobel?", alternativas: [{ texto: "Ada Lovelace", correta: false }, { texto: "Marie Curie", correta: true }, { texto: "Katherine Johnson", correta: false }, { texto: "Rosalind Franklin", correta: false }] },
+            { tag: "Computação • História", texto: "Ada Lovelace é considerada uma pioneira principalmente em qual área?", alternativas: [{ texto: "Medicina", correta: false }, { texto: "Astronomia", correta: false }, { texto: "Programação de computadores", correta: true }, { texto: "Química", correta: false }] },
+            { tag: "Espaço • Matemática", texto: "Katherine Johnson realizou cálculos fundamentais para qual instituição?", alternativas: [{ texto: "NASA", correta: true }, { texto: "UNESCO", correta: false }, { texto: "OMS", correta: false }, { texto: "FIFA", correta: false }] },
+            { tag: "Exploração Espacial", texto: "Os cálculos de Katherine Johnson contribuíram diretamente para:", alternativas: [{ texto: "A criação do primeiro celular", correta: false }, { texto: "Missões espaciais tripuladas", correta: true }, { texto: "A descoberta da penicilina", correta: false }, { texto: "A invenção da televisão", correta: false }] },
+            { tag: "Genética • Biologia Molecular", texto: "Rosalind Franklin teve papel fundamental nos estudos que ajudaram a compreender a estrutura:", alternativas: [{ texto: "Do DNA", correta: true }, { texto: "Do Sol", correta: false }, { texto: "Do átomo de hidrogênio", correta: false }, { texto: "Dos oceanos", correta: false }] },
+            { tag: "Cientistas do Brasil • Genética", texto: "Qual dessas cientistas brasileiras ficou conhecida por seus estudos em genética e divulgação científica?", alternativas: [{ texto: "Marta", correta: false }, { texto: "Mayana Zatz", correta: true }, { texto: "Tarsila do Amaral", correta: false }, { texto: "Cora Coralina", correta: false }] },
+            { tag: "Prêmios Nobel • Marie Curie", texto: "Marie Curie ganhou Prêmios Nobel em duas áreas diferentes. Quais?", alternativas: [{ texto: "Física e Química", correta: true }, { texto: "Matemática e Física", correta: false }, { texto: "Medicina e Biologia", correta: false }, { texto: "Química e Matemática", correta: false }] },
+            { tag: "Ciência no Brasil • Zoologia", texto: "Bertha Lutz, importante cientista brasileira, atuou especialmente na área de:", alternativas: [{ texto: "Zoologia", correta: true }, { texto: "Engenharia espacial", correta: false }, { texto: "Computação", correta: false }, { texto: "Geologia", correta: false }] },
+            { tag: "História da Tecnologia", texto: "Verdadeiro ou falso: Ada Lovelace viveu muito antes dos computadores modernos que usamos atualmente.", alternativas: [{ texto: "Verdadeiro", correta: true }, { texto: "Falso", correta: false }] },
+            { tag: "Educação • Conceito STEM", texto: "Qual destas áreas faz parte da chamada STEM?", alternativas: [{ texto: "Ciência, Tecnologia, Engenharia e Matemática", correta: true }, { texto: "Somente Medicina e Biologia", correta: false }, { texto: "Somente Tecnologia", correta: false }, { texto: "História, Artes e Literatura", correta: false }] },
+            { tag: "Virologia • Pandemia", texto: "Jaqueline Goes de Jesus ganhou destaque durante a pandemia de COVID-19 porque participou:", alternativas: [{ texto: "Da construção de respiradores", correta: false }, { texto: "Do sequenciamento do genoma do coronavírus no Brasil", correta: true }, { texto: "Da criação do primeiro hospital digital", correta: false }, { texto: "Da descoberta da penicilina", correta: false }] },
+            { tag: "Liderança Indígena", texto: "Sônia Guajajara é uma importante liderança indígena brasileira. Sua formação acadêmica inicial é na área de:", alternativas: [{ texto: "Matemática", correta: false }, { texto: "Letras e Enfermagem", correta: true }, { texto: "Engenharia", correta: false }, { texto: "Astronomia", correta: false }] },
+            { tag: "Pesquisa Científica", texto: "A pesquisadora negra brasileira Jaqueline Goes de Jesus tem atuação científica ligada principalmente à:", alternativas: [{ texto: "Biomedicina e genômica", correta: true }, { texto: "Engenharia civil", correta: false }, { texto: "Astronomia", correta: false }, { texto: "Matemática financeira", correta: false }] },
+            { tag: "Saberes Tradicionais", texto: "Mulheres indígenas possuem conhecimentos tradicionais importantes para a ciência. Qual destes é um exemplo?", alternativas: [{ texto: "Conhecimentos sobre plantas, biodiversidade e uso dos recursos naturais", correta: true }, { texto: "Apenas conhecimentos sobre computadores", correta: false }, { texto: "Somente conhecimentos matemáticos", correta: false }, { texto: "Nenhuma das alternativas", correta: false }] },
+            { tag: "Genética e Inclusão", texto: "Qual cientista brasileira ficou conhecida por suas pesquisas sobre doenças genéticas e inclusão?", alternativas: [{ texto: "Mayana Zatz", correta: true }, { texto: "Bertha Lutz", correta: false }, { texto: "Jaqueline Goes de Jesus", correta: false }, { texto: "Sônia Guajajara", correta: false }] },
+            { tag: "Diversidade e Inovação", texto: "Por que é importante incentivar a participação das mulheres na ciência e tecnologia?", alternativas: [{ texto: "Para que apenas mulheres trabalhem nessas áreas", correta: false }, { texto: "Para aumentar a diversidade de ideias e contribuir para novas descobertas", correta: true }, { texto: "Porque homens não podem trabalhar nessas áreas", correta: false }, { texto: "Para substituir outras profissões", correta: false }] }
         ];
 
         let indiceAtual = 0;
         let pontuacaoTotal = 0;
         let respondido = false;
+        let streamWebcam = null;
 
         const startScreenEl = document.getElementById("start-screen");
         const quizScreenEl = document.getElementById("quiz-screen");
@@ -746,10 +336,13 @@
         const questionBoxWrapper = document.getElementById("question-box-wrapper");
         const resultIconEl = document.getElementById("result-icon");
         const resultTitleEl = document.getElementById("result-title");
+        const rankingListEl = document.getElementById("ranking-list");
+        const modalWebcamEl = document.getElementById("modal-webcam");
+        const webcamVideoEl = document.getElementById("webcam-video");
 
         const somAcerto = document.getElementById("som-acerto");
         const somErro = document.getElementById("som-erro");
-        const somNotaBaixa = document.getElementById("som-nota-baixa");
+        const somNotaBaixa = document.getElementById("som-notabaixa");
         const somNotaBoa = document.getElementById("som-notaboa");
         const somTrilha = document.getElementById("som-trilha");
 
@@ -759,7 +352,7 @@
             quizScreenEl.style.display = "flex";
             
             somTrilha.currentTime = 0;
-            somTrilha.play().catch(e => console.log("Áudio bloqueado pelo navegador até interação"));
+            somTrilha.play().catch(e => console.log("Áudio bloqueado pelo navegador"));
 
             indiceAtual = 0;
             pontuacaoTotal = 0;
@@ -773,18 +366,6 @@
                 [arr[i], arr[j]] = [arr[j], arr[i]];
             }
             return arr;
-        }
-
-        function abrirModalZoom(src) {
-            const modal = document.getElementById("image-modal");
-            const modalImg = document.getElementById("modal-img");
-            modalImg.src = src;
-            modal.classList.add("active");
-        }
-
-        function fecharModalZoom() {
-            const modal = document.getElementById("image-modal");
-            modal.classList.remove("active");
         }
 
         function carregarQuestao() {
@@ -806,22 +387,13 @@
 
             const alternativasEmbaralhadas = embaralharArray(q.alternativas);
 
-            if (q.imagem) {
-                const mediaDiv = document.createElement("div");
-                mediaDiv.className = "media-container";
-                let clickAttr = q.zoomavel ? `onclick="abrirModalZoom('${q.imagem}')"` : "";
-                let legendHtml = q.zoomavel ? `<div class="image-hint-legend">🔍 Clique na imagem para ver ampliado</div>` : "";
-                mediaDiv.innerHTML = `<img id="question-image" class="question-image" src="${q.imagem}" alt="Imagem da Questão" ${clickAttr}>${legendHtml}`;
-                dynamicContentArea.appendChild(mediaDiv);
-            }
-
             const gridDiv = document.createElement("div");
             gridDiv.className = "options-grid";
             alternativasEmbaralhadas.forEach((alt, idx) => {
                 const btn = document.createElement("button");
                 btn.classList.add("option-btn");
                 const letras = ['A', 'B', 'C', 'D'];
-                btn.innerHTML = `<strong>${letras[idx]})&nbsp;</strong> ${alt.texto.replace(/^[A-D]\)\s*/, '')}`;
+                btn.innerHTML = `<strong>${letras[idx]})&nbsp;</strong> ${alt.texto}`;
                 btn.onclick = () => selecionarAlternativa(alt, btn, q);
                 gridDiv.appendChild(btn);
             });
@@ -853,7 +425,7 @@
 
                 botoes.forEach(b => {
                     const textoBotao = b.textContent.trim();
-                    const corretaTexto = q.alternativas.find(a => a.correta).texto.replace(/^[A-D]\)\s*/, '');
+                    const corretaTexto = q.alternativas.find(a => a.correta).texto;
                     if (textoBotao.includes(corretaTexto)) {
                         b.classList.add("correct");
                     }
@@ -874,6 +446,24 @@
             }
         }
 
+        function obterRanking() {
+            let ranking = JSON.parse(localStorage.getItem("quiz_ranking_mulheres")) || [];
+            return ranking;
+        }
+
+        function salvarRanking(ranking) {
+            localStorage.setItem("quiz_ranking_mulheres", JSON.stringify(ranking));
+        }
+
+        function verificarSeEntraNoRanking(pontos) {
+            if (pontos <= 1) return false; // Deve acertar mais de 1 ponto
+            let ranking = obterRanking();
+            if (ranking.length < 3) return true;
+            // Verifica se é maior que o menor score do top 3
+            let menorScore = ranking[ranking.length - 1].pontos;
+            return pontos > menorScore;
+        }
+
         function mostrarResultado() {
             quizScreenEl.style.display = "none";
             scoreScreenEl.style.display = "block";
@@ -888,17 +478,86 @@
                 document.body.classList.add("defeat-theme");
                 resultIconEl.textContent = "⚠️";
                 resultTitleEl.textContent = "Quase lá!";
-                finalMessageEl.textContent = "Continue estudando e praticando! Você consegue melhorar ainda mais!";
+                finalMessageEl.textContent = "Continue estudando e praticando!";
                 somNotaBaixa.currentTime = 0;
                 somNotaBaixa.play();
             } else {
                 document.body.classList.remove("defeat-theme");
                 resultIconEl.textContent = "🏆";
                 resultTitleEl.textContent = "Fim da Aventura!";
-                finalMessageEl.textContent = "Parabéns! Excelente desempenho no quiz sobre Mulheres na Ciência!";
+                finalMessageEl.textContent = "Parabéns pelo ótimo desempenho!";
                 somNotaBoa.currentTime = 0;
                 somNotaBoa.play();
             }
+
+            atualizarTelaRanking();
+
+            // Verifica regra: acertar mais de 1 ponto e entrar no top 3
+            if (verificarSeEntraNoRanking(notaFinal)) {
+                abrirWebcamParaFoto(notaFinal);
+            }
+        }
+
+        function atualizarTelaRanking(novaFotoBase64 = null, novaPontuacao = null) {
+            let ranking = obterRanking();
+
+            if (novaFotoBase64 !== null && novaPontuacao !== null) {
+                let nome = prompt("Parabéns! Você entrou no Top 3! Digite seu nome:") || "Cientista";
+                ranking.push({ nome: nome, pontos: novaPontuacao, foto: novaFotoBase64 });
+                // Ordena do maior para o menor e pega apenas os 3 primeiros
+                ranking.sort((a, b) => b.pontos - a.pontos);
+                ranking = ranking.slice(0, 3);
+                salvarRanking(ranking);
+            }
+
+            rankingListEl.innerHTML = "";
+            if (ranking.length === 0) {
+                rankingListEl.innerHTML = `<li class="ranking-item" style="justify-content:center; color:#78909c;">Nenhum recorde ainda. Acima de 1.0 pt entra aqui!</li>`;
+                return;
+            }
+
+            ranking.forEach((item, index) => {
+                let li = document.createElement("li");
+                li.className = "ranking-item";
+                let imgTag = item.foto ? `<img src="${item.foto}" class="ranking-avatar">` : `👤 `;
+                li.innerHTML = `<span>#${index+1} ${imgTag} <strong>${item.nome}</strong></span> <span>⭐ ${item.pontos.toFixed(1)} pts</span>`;
+                rankingListEl.appendChild(li);
+            });
+        }
+
+        async function abrirWebcamParaFoto(pontos) {
+            modalWebcamEl.style.display = "flex";
+            try {
+                streamWebcam = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+                webcamVideoEl.srcObject = streamWebcam;
+            } catch (err) {
+                console.error("Erro ao acessar a webcam: ", err);
+                alert("Não foi possível acessar a webcam para tirar a foto do recorde.");
+                modalWebcamEl.style.display = "none";
+                atualizarTelaRanking(null, pontos); // Adiciona sem foto se der erro na câmera
+            }
+        }
+
+        function tirarFotoRecorde() {
+            const canvas = document.getElementById("webcam-canvas");
+            canvas.width = webcamVideoEl.videoWidth || 320;
+            canvas.height = webcamVideoEl.videoHeight || 240;
+            const ctx = canvas.getContext("2d");
+            
+            // Inverte a imagem horizontalmente no canvas para coincidir com o espelho do vídeo
+            ctx.translate(canvas.width, 0);
+            ctx.scale(-1, 1);
+            ctx.drawImage(webcamVideoEl, 0, 0, canvas.width, canvas.height);
+
+            const fotoDataUrl = canvas.toDataURL("image/png");
+
+            // Parar a webcam
+            if (streamWebcam) {
+                streamWebcam.getTracks().forEach(track => track.stop());
+            }
+
+            modalWebcamEl.style.display = "none";
+            atualizarTelaRanking(fotoDataUrl, pontuacaoTotal);
         }
 
         function reiniciarJogo() {
