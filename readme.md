@@ -1,4 +1,5 @@
-# 🔬 Quiz: Mulheres na Ciência
+# Criar o conteúdo do arquivo README.md
+readme_content = """# 🔬 Quiz: Mulheres na Ciência
 
 Este é um projeto de quiz interativo e gamificado, desenvolvido com tecnologias web nativas, focado em educar e inspirar estudantes sobre o papel fundamental das mulheres na história da Ciência, Tecnologia, Engenharia e Matemática (STEM).
 
@@ -6,15 +7,17 @@ Este é um projeto de quiz interativo e gamificado, desenvolvido com tecnologias
 O quiz apresenta 16 questões dinâmicas sobre cientistas icônicas (como Marie Curie e Ada Lovelace) e brasileiras contemporâneas (como Jaqueline Goes de Jesus e Mayana Zatz).
 
 ### Funcionalidades:
-*   **Gamificação:** Sistema de pontuação, barra de progresso e feedbacks imediatos de acerto ou erro.
+*   **Gamificação:** Sistema de pontuação, barra de progresso e feedbacks imediatos.
+*   **Hall da Fama (Top 3):** Sistema de ranking local que registra os maiores pontuadores, integrando **captura de fotos via webcam** para personalizar o pódio.
 *   **Design Responsivo:** Interface moderna, adaptável a diferentes tamanhos de tela.
-*   **Experiência do Usuário:** Integração de áudio para acertos, erros e telas finais.
+*   **Experiência do Usuário:** Integração de áudio para acertos, erros e estados de pontuação.
 *   **Interatividade:** Botões estilizados, transições suaves e design visual focado em ciência.
 
 ## 🛠️ Tecnologias Utilizadas
 *   **HTML5:** Estrutura da página.
-*   **CSS3:** Estilização responsiva, animações e paleta de cores tecnológica (Azul, Ciano e Magenta).
-*   **JavaScript:** Lógica do jogo, manipulação do DOM e controle de áudio.
+*   **CSS3:** Estilização responsiva, animações e paleta de cores tecnológica.
+*   **JavaScript:** Lógica do jogo, manipulação do DOM, controle de áudio e **API MediaDevices (Webcam)**.
+*   **LocalStorage:** Persistência dos dados do ranking no navegador do usuário.
 
 ## 📂 Estrutura do Projeto
 Para que o jogo funcione corretamente com os áudios e imagens, o projeto deve seguir esta estrutura:
