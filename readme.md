@@ -1,5 +1,4 @@
-# Criar o conteúdo do arquivo README.md
-readme_content = """# 🔬 Quiz: Mulheres na Ciência
+# 🔬 Quiz: Mulheres na Ciência
 
 Este é um projeto de quiz interativo e gamificado, desenvolvido com tecnologias web nativas, focado em educar e inspirar estudantes sobre o papel fundamental das mulheres na história da Ciência, Tecnologia, Engenharia e Matemática (STEM).
 
