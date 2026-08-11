@@ -1,6 +1,7 @@
 # 🔬 Quiz: Mulheres na Ciência
 
 Este é um projeto de quiz interativo e gamificado, desenvolvido com tecnologias web nativas, focado em educar e inspirar estudantes sobre o papel fundamental das mulheres na história da Ciência, Tecnologia, Engenharia e Matemática (STEM).
+![Tela Inicial](img/prints/print1.png)
 
 ## 🚀 Sobre o Projeto
 O quiz apresenta 16 questões dinâmicas sobre cientistas icônicas (como Marie Curie e Ada Lovelace) e brasileiras contemporâneas (como Jaqueline Goes de Jesus e Mayana Zatz).
@@ -40,4 +41,6 @@ Para que o jogo funcione corretamente com os áudios e imagens, o projeto deve s
 3.  **Customização:** Você pode editar facilmente a constante `questoes` dentro do arquivo `index.html` para adicionar, remover ou modificar perguntas sem precisar alterar a lógica do jogo.
 
 ---
+## 🔗 Projetos Relacionados
+*   [Projeto Base: Gamificação da Cultura Capixaba](https://github.com/JuniorCriste/gamificacao-da-cultura-capixaba-como-estrategia-pedagogica)
 *Projeto desenvolvido para fins educacionais.*
