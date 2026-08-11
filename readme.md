@@ -43,4 +43,6 @@ Para que o jogo funcione corretamente com os áudios e imagens, o projeto deve s
 ---
 ## 🔗 Projetos Relacionados
 *   [Projeto Base: Gamificação da Cultura Capixaba](https://github.com/JuniorCriste/gamificacao-da-cultura-capixaba-como-estrategia-pedagogica)
+
+<br/>
 *Projeto desenvolvido para fins educacionais.*
